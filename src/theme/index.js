@@ -28,8 +28,18 @@ export const theme = createTheme({
       },
     },
     h3: { fontSize: 30 },
-    h4: { fontSize: 16 },
-    h5: { fontSize: 14 },
+    h4: {
+      fontSize: 16,
+      "@media (max-width:768px)": {
+        fontSize: 12,
+      },
+    },
+    h5: {
+      fontSize: 14,
+      "@media (max-width:768px)": {
+        fontSize: 10,
+      },
+    },
     h6: { fontSize: 12 },
     button: { textTransform: "none" },
   },
@@ -56,9 +66,13 @@ export const theme = createTheme({
             },
           },
 
-          // "&.MuiButton-sizeSmall": {
-          //   padding: "11px 35px",
-          // },
+          "&.MuiButton-sizeSmall": {
+            padding: "11px 35px",
+            "@media (max-width:768px)": {
+              padding: "5px 10px",
+              fontSize: 12,
+            },
+          },
         },
       },
     },

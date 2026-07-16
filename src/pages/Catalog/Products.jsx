@@ -1,11 +1,19 @@
 import React from "react";
 import Card from "../../components/shared/Card";
-import { Box, Pagination, Skeleton, Typography } from "@mui/material";
+import {
+  Box,
+  Pagination,
+  Skeleton,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { useGetProductsQuery } from "../../app/api/api";
 import { useSearchParams } from "react-router-dom";
 
 const Products = ({ filters }) => {
+  const md = useMediaQuery("(min-width:768px)");
+
   const { data, isLoading, isFetching } = useGetProductsQuery(filters);
 
   const products = data?.data || [];
@@ -44,7 +52,7 @@ const Products = ({ filters }) => {
                 <Skeleton
                   variant="rounded"
                   sx={{ mb: 1 }}
-                  height={280}
+                  height={md ? 280 : 153}
                   width="100%"
                 />
                 <Skeleton variant="text" sx={{ mb: 0.5 }} width="70%" />

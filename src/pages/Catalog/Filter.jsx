@@ -122,6 +122,7 @@ const Filter = ({ t }) => {
       />
       <Box
         sx={{
+          width: "100%",
           mt: 2,
           p: 1,
           border: "1px solid #ddd",

@@ -5,6 +5,7 @@ import {
   Grid,
   TextField,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 
 import { useForm } from "react-hook-form";
@@ -16,6 +17,8 @@ import CartItem from "../../components/layout/Cart/CartItem";
 import { useGetCartQuery, useCreateOrderMutation } from "../../app/api/api";
 
 const Checkout = ({ t }) => {
+  const md = useMediaQuery("(min-width:768px)");
+
   const { data: cart, isLoading, refetch } = useGetCartQuery();
 
   const [createOrder, { isLoading: isCreating }] = useCreateOrderMutation();
@@ -86,9 +89,9 @@ const Checkout = ({ t }) => {
     <Box component="section">
       <Container>
         <Typography
-          variant="h3"
           sx={{
-            m: "40px 0",
+            m: { xs: "30px 0", md: "40px 0" },
+            fontSize: { xs: 16, md: 30 },
             textAlign: "center",
           }}
         >
@@ -99,21 +102,23 @@ const Checkout = ({ t }) => {
           sx={{
             fontSize: 18,
             fontWeight: "bold",
-            mb: 3,
+            mb: { xs: 2, md: 3 },
           }}
         >
           {t("checkout.fillFields")}
         </Typography>
 
-        <Grid container spacing={10}>
+        <Grid container spacing={{ xs: 0, md: 10 }}>
           {/* FORM */}
 
-          <Grid size={6}>
+          <Grid size={{ xs: 12, md: 6 }}>
             <Box component="form" onSubmit={handleSubmit(onSubmit)}>
               <Box
                 sx={{
                   display: "flex",
+                  flexDirection: { xs: "column", md: "row" },
                   columnGap: "20px",
+                  rowGap: "26px",
                 }}
               >
                 <Box width="50%">
@@ -126,7 +131,7 @@ const Checkout = ({ t }) => {
                     helperText={errors.name?.message}
                   />
 
-                  <Typography variant="h5" sx={{ mt: 3 }}>
+                  <Typography variant="h5" sx={{ mt: 3, mb: 1 }}>
                     {t("checkout.phone")}
                   </Typography>
 
@@ -137,7 +142,7 @@ const Checkout = ({ t }) => {
                     helperText={errors.phone?.message}
                   />
 
-                  <Typography variant="h5" sx={{ mt: 3 }}>
+                  <Typography variant="h5" sx={{ mt: 3, mb: 1 }}>
                     {t("checkout.address")}
                   </Typography>
 
@@ -159,13 +164,13 @@ const Checkout = ({ t }) => {
                     helperText={errors.lastName?.message}
                   />
 
-                  <Typography variant="h5" sx={{ mt: 3 }}>
+                  <Typography variant="h5" sx={{ mt: 3, mb: 1 }}>
                     e-mail*
                   </Typography>
 
                   <TextField fullWidth />
 
-                  <Typography variant="h5" sx={{ mt: 3 }}>
+                  <Typography variant="h5" sx={{ mt: 3, mb: 1 }}>
                     WhatsApp/Telegram
                   </Typography>
 
@@ -173,34 +178,38 @@ const Checkout = ({ t }) => {
                 </Box>
               </Box>
 
-              <Typography
-                sx={{
-                  color: "#777",
-                  textTransform: "uppercase",
-                  mt: 6,
-                  mb: 2,
-                }}
-              >
-                {t("checkout.checkData")}
-              </Typography>
-
-              <Button
-                type="submit"
-                variant="contained"
-                size="large"
-                disabled={isCreating}
-              >
-                {isCreating ? "Отправка..." : t("checkout.confirmOrder")}
-              </Button>
+              {md && (
+                <>
+                  <Typography
+                    sx={{
+                      color: "#777",
+                      textTransform: "uppercase",
+                      mt: 6,
+                      mb: 2,
+                    }}
+                  >
+                    {t("checkout.checkData")}
+                  </Typography>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    size="large"
+                    disabled={isCreating}
+                  >
+                    {isCreating ? "Отправка..." : t("checkout.confirmOrder")}
+                  </Button>
+                </>
+              )}
             </Box>
           </Grid>
 
           {/* CART */}
 
-          <Grid size={6}>
+          <Grid size={{ xs: 12, md: 6 }}>
             <Box
               sx={{
                 p: 3,
+                mt: { xs: 4, md: 0 },
                 border: "1px solid #CCC",
                 borderRadius: 2,
               }}
@@ -231,6 +240,29 @@ const Checkout = ({ t }) => {
               </Typography>
             </Box>
           </Grid>
+          {!md && (
+            <>
+              <Typography
+                sx={{
+                  color: "#777",
+                  textTransform: "uppercase",
+                  mt: 6,
+                  mb: 2,
+                }}
+              >
+                {t("checkout.checkData")}
+              </Typography>
+              <Button
+                onClick={handleSubmit(onSubmit)}
+                variant="contained"
+                size="large"
+                fullWidth
+                disabled={isCreating}
+              >
+                {isCreating ? "Отправка..." : t("checkout.confirmOrder")}
+              </Button>
+            </>
+          )}
         </Grid>
       </Container>
     </Box>

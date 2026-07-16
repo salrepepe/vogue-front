@@ -63,10 +63,10 @@ const Details = ({ t }) => {
           {breadcrumbs}
         </Breadcrumbs>
         <Grid container sx={{ mt: 4 }} spacing={4}>
-          <Grid size={{ xs: 6, sm: 4, md: 8 }}>
+          <Grid size={{ xs: 12, sm: 4, md: 8 }}>
             <Images isLoading={isLoading} product={product} t={t} />
           </Grid>
-          <Grid size={{ xs: 6, sm: 4, md: 4 }}>
+          <Grid size={{ xs: 12, sm: 4, md: 4 }}>
             <Description isLoading={isLoading} product={product} t={t} />
           </Grid>
         </Grid>
