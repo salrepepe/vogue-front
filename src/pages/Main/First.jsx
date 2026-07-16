@@ -6,7 +6,7 @@ const First = () => {
     <Box
       component="section"
       sx={{
-        height: "100vh",
+        height: { xs: "288px", md: "100vh" },
         width: "100vw",
       }}
     >

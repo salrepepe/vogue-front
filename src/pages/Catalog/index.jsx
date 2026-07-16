@@ -1,10 +1,12 @@
 import { useSearchParams } from "react-router-dom";
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, useMediaQuery } from "@mui/material";
 import Filter from "./Filter";
 import Products from "./Products";
 import Brands from "./Brands";
 
 const Catalog = ({ t }) => {
+  const md = useMediaQuery("(min-width:900px)");
+
   const [params] = useSearchParams();
 
   const filters = {
@@ -17,13 +19,15 @@ const Catalog = ({ t }) => {
 
   return (
     <Container sx={{ mt: 4 }} maxWidth="xl">
-      <Brands t={t} />
+      {md && <Brands t={t} />}{" "}
       <Grid container spacing={2}>
-        <Grid size={2}>
-          <Filter t={t} />
-        </Grid>
+        {md && (
+          <Grid size={{ md: 3, xl: 2 }}>
+            <Filter t={t} />
+          </Grid>
+        )}
 
-        <Grid size={10}>
+        <Grid size={{ xs: 12, md: 9, xl: 10 }}>
           <Products filters={filters} />
         </Grid>
       </Grid>

@@ -10,7 +10,7 @@ const Women = () => {
         "& a": { display: "block", width: "fit-content", fontSize: 14, mb: 1 },
       }}
     >
-      <Grid size={3}>
+      <Grid size={{ xs: 12, md: 3 }}>
         <Link
           className="menu-item"
           to="/catalog"
@@ -58,7 +58,7 @@ const Women = () => {
           Верхняя одежда
         </Link>
       </Grid>
-      <Grid size={3}>
+      <Grid size={{ xs: 12, md: 3 }}>
         <Link
           className="menu-item"
           to="/catalog"
@@ -82,7 +82,7 @@ const Women = () => {
           Кеды
         </Link>
       </Grid>
-      <Grid size={3}>
+      <Grid size={{ xs: 12, md: 3 }}>
         <Link
           className="menu-item"
           to="/catalog"
@@ -103,7 +103,7 @@ const Women = () => {
           Платки
         </Link>
       </Grid>
-      <Grid size={3}>
+      <Grid size={{ xs: 12, md: 3 }}>
         <Typography variant="h5" style={{ fontWeight: 600, marginBottom: 1.2 }}>
           Бренды
         </Typography>

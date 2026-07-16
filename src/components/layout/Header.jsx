@@ -1,7 +1,14 @@
 import logo from "../../assets/images/logo.png";
 import logoBlack from "../../assets/images/logoBlack.png";
 
-import { Badge, Box, Container, IconButton, Typography } from "@mui/material";
+import {
+  Badge,
+  Box,
+  Container,
+  IconButton,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import Menu from "../../assets/icons/menu.jsx";
 import LanguageSwitcher from "../shared/LanguageSwitcher.jsx";
@@ -12,6 +19,7 @@ const Header = ({ t, setTransition, setOpen, setOpenCart }) => {
   const location = useLocation();
 
   const { data: cartBadge } = useGetCartQuery();
+  const md = useMediaQuery("(min-width:900px)");
 
   return (
     <Box
@@ -39,16 +47,20 @@ const Header = ({ t, setTransition, setOpen, setOpenCart }) => {
           <div>
             <span style={{ cursor: "pointer" }} onClick={() => setOpen(true)}>
               <Menu color={location.pathname === "/" ? "#FFF" : "#000"} />
-              <Typography sx={{ ml: 1, mr: 3 }} component="span">
-                {t("nav.menu")}
-              </Typography>
+              {md && (
+                <Typography sx={{ ml: 1, mr: 3 }} component="span">
+                  {t("nav.menu")}
+                </Typography>
+              )}
             </span>
 
-            <Typography sx={{ ml: 1 }} component="span">
-              {t("nav.delivery")}
-            </Typography>
+            {md && (
+              <Typography sx={{ ml: 1 }} component="span">
+                {t("nav.delivery")}
+              </Typography>
+            )}
           </div>
-        ) : (
+        ) : md ? (
           <Box sx={{ display: "flex", columnGap: 5 }}>
             {/* <Link to="/catalog">
               <Typography variant="h5">{t("nav.newArrivals")}</Typography>
@@ -62,12 +74,25 @@ const Header = ({ t, setTransition, setOpen, setOpenCart }) => {
             {/* <Typography variant="h5">{t("nav.accessories")}</Typography> */}
             {/* <Typography variant="h5">{t("nav.sale")}</Typography> */}
           </Box>
+        ) : (
+          <span style={{ cursor: "pointer" }} onClick={() => setOpen(true)}>
+            <Menu color={location.pathname === "/" ? "#FFF" : "#000"} />
+            {md && (
+              <Typography sx={{ ml: 1, mr: 3 }} component="span">
+                {t("nav.menu")}
+              </Typography>
+            )}
+          </span>
         )}
         <Link to="/">
-          <img src={location.pathname === "/" ? logo : logoBlack} alt="" />
+          <img
+            src={location.pathname === "/" ? logo : logoBlack}
+            style={{ height: md ? "auto" : 21, width: md ? "auto" : 80 }}
+            alt=""
+          />
         </Link>
         <Box sx={{ display: "flex", columnGap: 2, alignItems: "center" }}>
-          <LanguageSwitcher setTransition={setTransition} />
+          {md && <LanguageSwitcher setTransition={setTransition} />}
           {/* <IconButton>
             <Favorites color={location.pathname === "/" ? "#FFF" : "#000"} />
           </IconButton> */}

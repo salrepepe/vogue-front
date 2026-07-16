@@ -30,7 +30,7 @@ const Products = ({ filters }) => {
       <Grid container spacing={2}>
         {isFetching || isLoading ? (
           Array.from({ length: 12 }).map((_, index) => (
-            <Grid size={3} key={index}>
+            <Grid size={{ xs: 6, md: 4, lg: 4, xl: 3 }} key={index}>
               <Box
                 sx={{
                   p: "10px",
@@ -64,7 +64,7 @@ const Products = ({ filters }) => {
           </Typography>
         ) : (
           products.map((p) => (
-            <Grid size={3} key={p.id}>
+            <Grid size={{ xs: 6, md: 4, lg: 4, xl: 3 }} key={p.id}>
               <Card item={p} />
             </Grid>
           ))

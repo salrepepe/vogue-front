@@ -1,9 +1,12 @@
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
-import product from "../../assets/images/product.png";
-import zara from "../../assets/images/zara.png";
+
 import { Link } from "react-router-dom";
 import img1 from "../../assets/images/bg.png";
 import { useGetBrandsQuery } from "../../app/api/api";
+import women1 from "../../assets/images/women-1.png";
+import women2 from "../../assets/images/women-2.png";
+import women3 from "../../assets/images/women-3.png";
+import women4 from "../../assets/images/women-4.png";
 
 const Women = ({ t }) => {
   const catalogCategories = [
@@ -11,22 +14,25 @@ const Women = ({ t }) => {
       id: 1,
       name: "Одежда",
       slug: "/catalog?category=women%2Fclothes",
-      image:
-        "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80",
+      image: women1,
     },
     {
       id: 2,
       name: "Обувь",
       slug: "/catalog?category=women%2Fshoes",
-      image:
-        "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
+      image: women3,
     },
     {
       id: 3,
+      name: "Сумки",
+      slug: "/catalog?category=women%2Faccessories",
+      image: women2,
+    },
+    {
+      id: 4,
       name: "Аксессуары",
       slug: "/catalog?category=women%2Faccessories",
-      image:
-        "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=800&q=80",
+      image: women4,
     },
   ];
 
@@ -36,16 +42,25 @@ const Women = ({ t }) => {
     <Box
       component="section"
       sx={{
-        pt: "51px",
-        pb: "70px",
+        p: { xs: "30px 0 70px", md: "51px 0 70px" },
       }}
     >
-      <img src={img1} style={{ height: "100vh", marginBottom: 50 }} alt="" />
+      <Box
+        component="img"
+        src={img1}
+        sx={{
+          height: "100vh",
+          marginBottom: { xs: "20px", md: "50px" },
+          width: "100%",
+          objectFit: "cover",
+        }}
+        alt=""
+      />
       <Container>
         <Typography
           sx={{
             textAlign: "center",
-            mb: "62px",
+            mb: { xs: "30px", md: "62px" },
           }}
           variant="h2"
         >
@@ -53,14 +68,18 @@ const Women = ({ t }) => {
         </Typography>
         <Grid container spacing={2}>
           {catalogCategories.map((item, index) => (
-            <Grid size={{ xs: 6, sm: 4, md: 4 }} key={index}>
+            <Grid size={{ xs: 6, sm: 6, md: 3 }} key={index}>
               <Link to={item.slug}>
                 <Box sx={{}}>
-                  <img
+                  <Box
+                    component="img"
                     src={item.image}
-                    width="100%"
-                    height="100%"
-                    style={{ objectFit: "contain" }}
+                    sx={{
+                      objectFit: "cover",
+                      width: "100%",
+                      borderRadius: "10px",
+                      height: { xs: "154px", md: "100%" },
+                    }}
                     alt=""
                   />
                   <Typography sx={{ mt: "20px", textAlign: "center" }}>
@@ -73,7 +92,10 @@ const Women = ({ t }) => {
         </Grid>
         <Link to="/catalog?category=women">
           <Button
-            sx={{ m: "62px auto 70px", display: "block" }}
+            sx={{
+              m: { xs: "30px auto", md: "62px auto 70px" },
+              display: "block",
+            }}
             variant="outlined"
             size="medium"
           >
@@ -88,11 +110,14 @@ const Women = ({ t }) => {
                 to={`/catalog?brand=${item.slug}`}
                 key={index}
               >
-                <img
+                <Box
+                  component="img"
                   src={item.logo}
-                  width={145}
-                  height={86}
-                  style={{ objectFit: "contain" }}
+                  sx={{
+                    objectFit: "contain",
+                    width: { xs: "78px", md: "145px" },
+                    height: { xs: "46px", md: "85px" },
+                  }}
                   alt=""
                 />
               </Link>

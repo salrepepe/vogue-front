@@ -1,5 +1,8 @@
 import React from "react";
-import zara from "../../assets/images/zara.png";
+import man1 from "../../assets/images/man-1.png";
+import man2 from "../../assets/images/man-2.png";
+import man3 from "../../assets/images/man-3.png";
+import man4 from "../../assets/images/man-4.png";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useGetBrandsQuery } from "../../app/api/api";
@@ -10,22 +13,25 @@ const Man = ({ t }) => {
       id: 1,
       name: "Одежда",
       slug: "/catalog?category=men%2Fclothes",
-      image:
-        "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80",
+      image: man1,
     },
     {
       id: 2,
       name: "Обувь",
       slug: "/catalog?category=men%2Fshoes",
-      image:
-        "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
+      image: man3,
     },
     {
       id: 3,
       name: "Аксессуары",
       slug: "/catalog?category=men%2Faccessories",
-      image:
-        "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=800&q=80",
+      image: man4,
+    },
+    {
+      id: 4,
+      name: "Сумки",
+      slug: "/catalog?category=men%2Faccessories",
+      image: man2,
     },
   ];
 
@@ -34,19 +40,29 @@ const Man = ({ t }) => {
   return (
     <section>
       <Container>
-        <Typography variant="h2" sx={{ m: "40px 0 62px", textAlign: "center" }}>
+        <Typography
+          variant="h2"
+          sx={{
+            m: { xs: "20px 0 30px", md: "40px 0 62px" },
+            textAlign: "center",
+          }}
+        >
           {t("nav.men")}
         </Typography>
         <Grid container spacing={2}>
           {catalogCategories.map((item, index) => (
-            <Grid size={{ xs: 6, sm: 4, md: 4 }} key={index}>
+            <Grid size={{ xs: 6, sm: 6, md: 3}} key={index}>
               <Link to={item.slug}>
                 <Box>
-                  <img
+                  <Box
+                    component="img"
                     src={item.image}
-                    width="100%"
-                    height="100%"
-                    style={{ objectFit: "contain" }}
+                    sx={{
+                      objectFit: "cover",
+                      width: "100%",
+                      borderRadius: "10px",
+                      height: { xs: "154px", md: "100%" },
+                    }}
                     alt=""
                   />
                   <Typography sx={{ mt: "20px", textAlign: "center" }}>
@@ -59,7 +75,10 @@ const Man = ({ t }) => {
         </Grid>
         <Link to="/catalog?category=men">
           <Button
-            sx={{ m: "62px auto 70px", display: "block" }}
+            sx={{
+              m: { xs: "30px auto", md: "62px auto 70px" },
+              display: "block",
+            }}
             variant="outlined"
             size="medium"
           >
@@ -74,11 +93,14 @@ const Man = ({ t }) => {
                 to={`/catalog?brand=${item.slug}`}
                 key={index}
               >
-                <img
+                <Box
+                  component="img"
                   src={item.logo}
-                  width={145}
-                  height={86}
-                  style={{ objectFit: "contain" }}
+                  sx={{
+                    objectFit: "contain",
+                    width: { xs: "78px", md: "145px" },
+                    height: { xs: "46px", md: "85px" },
+                  }}
                   alt=""
                 />
               </Link>

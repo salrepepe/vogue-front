@@ -1,8 +1,10 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, useMediaQuery } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 
 const Men = () => {
+  const md = useMediaQuery("(min-width:768px)");
+
   return (
     <Grid
       container
@@ -15,7 +17,7 @@ const Men = () => {
         "& a": { display: "block", width: "fit-content", fontSize: 14, mb: 1 },
       }}
     >
-      <Grid size={3}>
+      <Grid size={{ xs: 12,  md: 3 }}>
         <Link
           to=""
           className="menu-item"
@@ -55,7 +57,7 @@ const Men = () => {
           Верхняя одежда
         </Link>
       </Grid>
-      <Grid size={3}>
+      <Grid size={{ xs: 12,  md: 3 }}>
         <Link
           to=""
           className="menu-item"
@@ -77,7 +79,7 @@ const Men = () => {
           Кеды
         </Link>
       </Grid>
-      <Grid size={3}>
+      <Grid size={{ xs: 12,  md: 3 }}>
         <Link
           to=""
           className="menu-item"
@@ -96,7 +98,7 @@ const Men = () => {
           Очки
         </Link>
       </Grid>
-      <Grid size={3}>
+      <Grid size={{ xs: 12,  md: 3 }}>
         <Typography variant="h5" sx={{ fontWeight: 600, mb: 1.2 }}>
           Бренды
         </Typography>

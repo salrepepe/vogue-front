@@ -21,7 +21,12 @@ export const theme = createTheme({
   typography: {
     fontFamily: "Kinetika",
     h1: { fontWeight: 700 },
-    h2: { fontSize: 30 },
+    h2: {
+      fontSize: 30,
+      "@media (max-width:768px)": {
+        fontSize: 18,
+      },
+    },
     h3: { fontSize: 30 },
     h4: { fontSize: 16 },
     h5: { fontSize: 14 },
@@ -46,11 +51,14 @@ export const theme = createTheme({
 
           "&.MuiButton-sizeMedium": {
             padding: "15px 34px",
+            "@media (max-width:768px)": {
+              padding: "8px 15px",
+            },
           },
 
-          "&.MuiButton-sizeSmall": {
-            padding: "11px 35px",
-          },
+          // "&.MuiButton-sizeSmall": {
+          //   padding: "11px 35px",
+          // },
         },
       },
     },

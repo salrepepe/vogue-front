@@ -17,7 +17,9 @@
     "brands": "Brands",
     "accessories": "Accessories",
     "sale": "Sale",
-    "delivery": "Delivery"
+    "delivery": "Delivery",
+    "perfume": "Perfume",
+    "contacts": "Contacts"
   },
   "catalog": {
     "filter": "Filter",

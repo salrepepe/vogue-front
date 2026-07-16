@@ -17,7 +17,9 @@
     "brands": "Бренды",
     "accessories": "Аксессуары",
     "sale": "Распродажа",
-    "delivery": "О доставке"
+    "delivery": "О доставке",
+    "perfume": "Парфюм",
+    "contacts": "Контакты"
   },
   "catalog": {
     "filter": "Фильтр",
