@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Kinetika';
+    src: local('Kinetika Medium'), local('Kinetika-Medium'),
+        url('Kinetika-Medium.woff2') format('woff2'),
+        url('Kinetika-Medium.woff') format('woff'),
+        url('Kinetika-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+  }

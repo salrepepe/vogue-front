@@ -1,0 +1,71 @@
+{
+  "nav": {
+    "home": "Home",
+    "shop": "Shop",
+    "products": "Products",
+    "cart": "Cart",
+    "checkout": "Checkout",
+    "account": "Account",
+    "menu": "Menu",
+    "search": "Search",
+    "women": "Women",
+    "see_more": "See more",
+    "men": "Men",
+    "tableware": "Tableware",
+    "newArrivals": "New Arrivals",
+    "catalog": "Catalog",
+    "brands": "Brands",
+    "accessories": "Accessories",
+    "sale": "Sale",
+    "delivery": "Delivery"
+  },
+  "catalog": {
+    "filter": "Filter",
+    "new": "New Arrivals",
+    "default": "Default",
+    "priceAsc": "Price: Low to High",
+    "priceDesc": "Price: High to Low",
+    "sale": "Sale Items",
+    "gender": "Gender",
+    "women": "Women",
+    "men": "Men",
+    "kids": "Kids",
+    "brand": "Brand",
+    "catalog": "Catalog"
+  },
+  "product": {
+    "add_to_cart": "Add to cart",
+    "buy_now": "Buy now",
+    "price": "Price",
+    "quantity": "Quantity",
+    "currentSize": "Current Size",
+    "currentColor": "Current Color",
+    "learnMore": "Learn more about the product"
+  },
+  "cart": {
+    "title": "Your cart",
+    "total": "Total",
+    "remove": "Remove",
+    "empty": "Cart is empty",
+    "clear": "Remove all items"
+  },
+  "checkout": {
+    "place_order": "Place order",
+    "name": "Name",
+    "phone": "Phone",
+    "address": "Address",
+    "title": "Checkout",
+    "checkData": "Check your details and selected items",
+    "fillFields": "Fill in the fields",
+    "lastName": "Last name",
+    "confirmOrder": "Confirm order",
+    "address1": "Country, region, city, street, house, apt.",
+    "success": "Order accepted",
+    "managerContact": "We will contact you shortly"
+  },
+  "status": {
+    "loading": "Loading...",
+    "success": "Success",
+    "error": "Error"
+  }
+}
