@@ -11,6 +11,8 @@ import ScreenTransition from "../components/ui/ScreenTransition";
 import { useState } from "react";
 import Cart from "../components/layout/Cart";
 import Chekout from "../pages/Checkout";
+import Footer from "../components/layout/Footer";
+import Brand from "../pages/Brand";
 
 const Site = ({ t }) => {
   const [transition, setTransition] = useState(false);
@@ -45,8 +47,10 @@ const Site = ({ t }) => {
           {/* PRODUCT DETAILS */}
           <Route path="/catalog/:slug/:id" element={<Details t={t} />} />
           <Route path="/checkout" element={<Chekout t={t} />} />
+          <Route path="/catalog/:brand" element={<Brand t={t} />} />
         </Routes>
       </Box>
+      <Footer t={t} />
     </>
   );
 };

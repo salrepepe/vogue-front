@@ -2,6 +2,8 @@ import React from "react";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import img2 from "../../assets/images/tableware-1.png";
 import img1 from "../../assets/images/others.png";
+import img3 from "../../assets/images/vazy.png";
+import img4 from "../../assets/images/polo.png";
 import tableware from "../../assets/images/tableware.png";
 
 const Tableware = ({ t }) => {
@@ -10,13 +12,25 @@ const Tableware = ({ t }) => {
       id: 1,
       name: "Посуда",
       slug: "/catalog?category=women%2Fclothes",
-      image: img1,
+      image: img2,
     },
     {
       id: 2,
-      name: "Прочее",
+      name: "Вазы",
       slug: "/catalog?category=women%2Fshoes",
-      image: img2,
+      image: img3,
+    },
+    {
+      id: 3,
+      name: "Полотенце",
+      slug: "/catalog?category=women%2Fshoes",
+      image: img4,
+    },
+    {
+      id: 4,
+      name: "Для дома",
+      slug: "/catalog?category=women%2Fshoes",
+      image: img1,
     },
   ];
   return (
@@ -43,7 +57,7 @@ const Tableware = ({ t }) => {
         </Typography>
         <Grid container spacing={2}>
           {categories.map((item, index) => (
-            <Grid size={{ xs: 6, sm: 6, md: 4 }} key={index}>
+            <Grid size={{ xs: 6, sm: 6, md: 3 }} key={index}>
               <Box sx={{}}>
                 <img
                   src={item.image}

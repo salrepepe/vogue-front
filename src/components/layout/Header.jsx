@@ -25,6 +25,7 @@ const Header = ({ t, setTransition, setOpen, setOpenCart }) => {
     <Box
       component="header"
       sx={{
+        zIndex: 1,
         position: location.pathname === "/" && "fixed",
         width: "100%",
         background:
@@ -54,11 +55,11 @@ const Header = ({ t, setTransition, setOpen, setOpenCart }) => {
               )}
             </span>
 
-            {md && (
+            {/* {md && (
               <Typography sx={{ ml: 1 }} component="span">
                 {t("nav.delivery")}
               </Typography>
-            )}
+            )} */}
           </div>
         ) : md ? (
           <Box sx={{ display: "flex", columnGap: 5 }}>
@@ -84,13 +85,15 @@ const Header = ({ t, setTransition, setOpen, setOpenCart }) => {
             )}
           </span>
         )}
-        <Link to="/">
-          <img
-            src={location.pathname === "/" ? logo : logoBlack}
-            style={{ height: md ? "auto" : 21, width: md ? "auto" : 80 }}
-            alt=""
-          />
-        </Link>
+        {location.pathname !== "/" && (
+          <Link to="/">
+            <img
+              src={location.pathname === "/" ? logo : logoBlack}
+              style={{ height: md ? "auto" : 21, width: md ? "auto" : 80 }}
+              alt=""
+            />
+          </Link>
+        )}
         <Box sx={{ display: "flex", columnGap: 2, alignItems: "center" }}>
           {md && <LanguageSwitcher setTransition={setTransition} />}
           {/* <IconButton>

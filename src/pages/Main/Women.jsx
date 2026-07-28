@@ -3,128 +3,76 @@ import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import img1 from "../../assets/images/bg.png";
 import { useGetBrandsQuery } from "../../app/api/api";
-import women1 from "../../assets/images/women-1.png";
-import women2 from "../../assets/images/women-2.png";
-import women3 from "../../assets/images/women-3.png";
-import women4 from "../../assets/images/women-4.png";
+import man1 from "../../assets/images/br.png";
+import man2 from "../../assets/images/kiton.png";
+import man3 from "../../assets/images/gucci.png";
+import man4 from "../../assets/images/dg.png";
+import man5 from "../../assets/images/dior.png";
+import man6 from "../../assets/images/sr.png";
+import man7 from "../../assets/images/lp.png";
+import man8 from "../../assets/images/ys.png";
+import bg from "../../assets/images/women-bg.png";
 
 const Women = ({ t }) => {
-  const catalogCategories = [
-    {
-      id: 1,
-      name: "Одежда",
-      slug: "/catalog?category=women%2Fclothes",
-      image: women1,
-    },
-    {
-      id: 2,
-      name: "Обувь",
-      slug: "/catalog?category=women%2Fshoes",
-      image: women3,
-    },
-    {
-      id: 3,
-      name: "Сумки",
-      slug: "/catalog?category=women%2Faccessories",
-      image: women2,
-    },
-    {
-      id: 4,
-      name: "Аксессуары",
-      slug: "/catalog?category=women%2Faccessories",
-      image: women4,
-    },
-  ];
+  const brands = [man1, man2, man3, man4, man5, man6, man7, man8];
 
   const { data, isLoading } = useGetBrandsQuery();
 
   return (
     <Box
       component="section"
-      sx={{
-        p: { xs: "30px 0 70px", md: "51px 0 70px" },
-      }}
+      sx={
+        {
+          // p: { xs: "30px 0 0", md: "0 0 0" },
+        }
+      }
     >
       <Box
         component="img"
         src={img1}
         sx={{
           height: "100vh",
-          marginBottom: { xs: "20px", md: "50px" },
           width: "100%",
           objectFit: "cover",
         }}
         alt=""
       />
-      <Container>
-        <Typography
-          sx={{
-            textAlign: "center",
-            mb: { xs: "30px", md: "62px" },
-          }}
-          variant="h2"
-        >
-          {t("nav.women")}
-        </Typography>
-        <Grid container spacing={2}>
-          {catalogCategories.map((item, index) => (
-            <Grid size={{ xs: 6, sm: 6, md: 3 }} key={index}>
-              <Link to={item.slug}>
-                <Box sx={{}}>
-                  <Box
-                    component="img"
-                    src={item.image}
-                    sx={{
-                      objectFit: "cover",
-                      width: "100%",
-                      borderRadius: "10px",
-                      height: { xs: "154px", md: "100%" },
-                    }}
-                    alt=""
-                  />
-                  <Typography sx={{ mt: "20px", textAlign: "center" }}>
-                    {item.name}
-                  </Typography>
-                </Box>
-              </Link>
-            </Grid>
-          ))}
-        </Grid>
-        <Link to="/catalog?category=women">
-          <Button
+      <Box
+        sx={{
+          background: `url(${bg}) center/cover no-repeat;`,
+          padding: "71px 0 ",
+        }}
+      >
+        <Container>
+          <Box
             sx={{
-              m: { xs: "30px auto", md: "62px auto 70px" },
-              display: "block",
+              width: "fit-content",
+              margin: "0 auto",
+              background: "#FFF",
+              borderRadius: "30px",
+              padding: "39px 50px 81px",
             }}
-            variant="outlined"
-            size="medium"
           >
-            {t("nav.see_more")}
-          </Button>
-        </Link>
-        <Box className="brands">
-          <Box className="brands-track">
-            {data?.map((item, index) => (
-              <Link
-                className="brand"
-                to={`/catalog?brand=${item.slug}`}
-                key={index}
-              >
-                <Box
-                  component="img"
-                  src={item.logo}
-                  sx={{
-                    objectFit: "contain",
-                    width: { xs: "78px", md: "145px" },
-                    height: { xs: "46px", md: "85px" },
-                  }}
-                  alt=""
-                />
-              </Link>
-            ))}
+            <Typography variant="h3" sx={{ mb: "73px", textAlign: "center" }}>
+              {t("nav.women")}
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                rowGap: "50px",
+                alignItems: "start",
+              }}
+            >
+              {data?.map((item, idx) => (
+                <Link to={`/catalog/${item.slug}`} key={idx}>
+                  <img src={item.logo} alt="" />
+                </Link>
+              ))}
+            </Box>
           </Box>
-        </Box>
-      </Container>
+        </Container>
+      </Box>
     </Box>
   );
 };

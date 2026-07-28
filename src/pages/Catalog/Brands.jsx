@@ -6,7 +6,7 @@ import { Box, Container, Grid, Skeleton } from "@mui/material";
 import { useGetBrandsQuery } from "../../app/api/api";
 import { useSearchParams } from "react-router-dom";
 
-const Brands = () => {
+const Brands = ({ b }) => {
   const { data, isLoading } = useGetBrandsQuery();
 
   const [params, setParams] = useSearchParams();
@@ -27,7 +27,7 @@ const Brands = () => {
     <Box
       component="section"
       sx={{
-        m: "100px 0",
+        m: !b ? "100px 0" : "60px 0",
       }}
     >
       <Container>

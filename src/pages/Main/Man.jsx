@@ -1,46 +1,60 @@
 import React from "react";
-import man1 from "../../assets/images/man-1.png";
-import man2 from "../../assets/images/man-2.png";
-import man3 from "../../assets/images/man-3.png";
-import man4 from "../../assets/images/man-4.png";
+import man1 from "../../assets/images/br.png";
+import man2 from "../../assets/images/kiton.png";
+import man3 from "../../assets/images/gucci.png";
+import man4 from "../../assets/images/dg.png";
+import man5 from "../../assets/images/dior.png";
+import man6 from "../../assets/images/sr.png";
+import man7 from "../../assets/images/lp.png";
+import man8 from "../../assets/images/ys.png";
+import bg from "../../assets/images/man1.png";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useGetBrandsQuery } from "../../app/api/api";
 
 const Man = ({ t }) => {
-  const catalogCategories = [
-    {
-      id: 1,
-      name: "Одежда",
-      slug: "/catalog?category=men%2Fclothes",
-      image: man1,
-    },
-    {
-      id: 2,
-      name: "Обувь",
-      slug: "/catalog?category=men%2Fshoes",
-      image: man3,
-    },
-    {
-      id: 3,
-      name: "Аксессуары",
-      slug: "/catalog?category=men%2Faccessories",
-      image: man4,
-    },
-    {
-      id: 4,
-      name: "Сумки",
-      slug: "/catalog?category=men%2Faccessories",
-      image: man2,
-    },
-  ];
+  const brands = [man1, man2, man3, man4, man5, man6, man7, man8];
 
   const { data, isLoading } = useGetBrandsQuery();
 
   return (
-    <section>
+    <Box
+      component="section"
+      sx={{
+        background: `url(${bg}) center/cover no-repeat;`,
+        padding: "71px 0",
+      }}
+    >
       <Container>
-        <Typography
+        <Box
+          sx={{
+            width: "fit-content",
+            margin: "0 auto",
+            background: "#FFF",
+            borderRadius: "30px",
+            padding: "39px 50px 81px",
+          }}
+        >
+          <Typography variant="h3" sx={{ mb: "73px", textAlign: "center" }}>
+            {" "}
+            {t("nav.men")}
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              rowGap: "50px",
+              alignItems: "start",
+            }}
+          >
+            {data?.map((item, idx) => (
+              <Link to={`/catalog/${item.slug}`} key={idx}>
+                <img src={item.logo} alt="" />
+              </Link>
+            ))}
+          </Box>
+        </Box>
+        {/* <Typography
           variant="h2"
           sx={{
             m: { xs: "20px 0 30px", md: "40px 0 62px" },
@@ -106,9 +120,9 @@ const Man = ({ t }) => {
               </Link>
             ))}
           </Box>
-        </Box>
+        </Box> */}
       </Container>
-    </section>
+    </Box>
   );
 };
 

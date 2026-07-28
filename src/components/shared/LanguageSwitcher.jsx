@@ -5,8 +5,7 @@ const LanguageSwitcher = ({ setTransition }) => {
   const { i18n } = useTranslation();
 
   const changeLanguage = () => {
-    const next =
-      i18n.language === "ru" ? "en" : i18n.language === "en" ? "kg" : "ru";
+    const next = i18n.language === "ru" ? "en" : "ru";
 
     setTransition(true);
 

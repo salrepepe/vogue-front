@@ -5,12 +5,26 @@ export const api = createApi({
   reducerPath: "api",
 
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://vogue-back.onrender.com/api",
+    baseUrl: "http://localhost:5500/api",
+
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem("adminToken");
+
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+
+      return headers;
+    },
   }),
 
-  tagTypes: ["Product", "Category", "Brand"],
+  tagTypes: ["Product", "Category", "Brand", "Orders", "Cart"],
 
   endpoints: (builder) => ({
+    // ======================
+    // PRODUCTS PUBLIC
+    // ======================
+
     getProducts: builder.query({
       query: (filters) => {
         const params = new URLSearchParams();
@@ -28,19 +42,155 @@ export const api = createApi({
         return `/products?${params.toString()}`;
       },
     }),
+
     getProductById: builder.query({
       query: (id) => `/products/${id}`,
     }),
 
+    // ======================
+    // CATEGORIES
+    // ======================
+
     getCategories: builder.query({
-      query: () => "/categories/tree",
+      query: () => "/categories",
       providesTags: ["Category"],
     }),
+
+    createCategory: builder.mutation({
+      query: (body) => ({
+        url: "/admin/categories",
+        method: "POST",
+        body,
+      }),
+
+      invalidatesTags: ["Category"],
+    }),
+
+    deleteCategory: builder.mutation({
+      query: (id) => ({
+        url: `/admin/categories/${id}`,
+        method: "DELETE",
+      }),
+
+      invalidatesTags: ["Category"],
+    }),
+
+    // ======================
+    // BRANDS
+    // ======================
 
     getBrands: builder.query({
       query: () => "/brands",
       providesTags: ["Brand"],
     }),
+
+    createBrand: builder.mutation({
+      query: (data) => ({
+        url: "/admin/brands",
+        method: "POST",
+        body: data,
+      }),
+
+      invalidatesTags: ["Brand"],
+    }),
+
+    deleteBrand: builder.mutation({
+      query: (id) => ({
+        url: `/admin/brands/${id}`,
+        method: "DELETE",
+      }),
+
+      invalidatesTags: ["Brand"],
+    }),
+
+    // ======================
+    // ADMIN PRODUCTS
+    // ======================
+
+    getAdminProducts: builder.query({
+      query: () => "/admin/products",
+      providesTags: ["Product"],
+    }),
+
+    createProduct: builder.mutation({
+      query: (body) => ({
+        url: "/admin/products",
+        method: "POST",
+        body,
+      }),
+
+      invalidatesTags: ["Product"],
+    }),
+
+    deleteProduct: builder.mutation({
+      query: (id) => ({
+        url: `/admin/products/${id}`,
+        method: "DELETE",
+      }),
+
+      invalidatesTags: ["Product"],
+    }),
+
+    // ======================
+    // UPLOAD R2
+    // ======================
+
+    uploadImage: builder.mutation({
+      query: (data) => ({
+        url: "/admin/upload",
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    // ======================
+    // AUTH
+    // ======================
+
+    loginAdmin: builder.mutation({
+      query: (data) => ({
+        url: "/auth/login",
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    // ======================
+    // DASHBOARD
+    // ======================
+
+    getDashboard: builder.query({
+      query: () => "/admin/dashboard",
+    }),
+
+    // ======================
+    // ORDERS
+    // ======================
+
+    getOrders: builder.query({
+      query: () => "/admin/orders",
+    }),
+
+    getOrderById: builder.query({
+      query: (id) => `/admin/orders/${id}`,
+      providesTags: ["Orders"],
+    }),
+
+    updateOrderStatus: builder.mutation({
+      query: ({ id, status }) => ({
+        url: `/admin/orders/${id}/status`,
+        method: "PATCH",
+        body: {
+          status,
+        },
+      }),
+
+      invalidatesTags: ["Orders"],
+    }),
+
+    // ======================
+    // CART
+    // ======================
 
     getCart: builder.query({
       query: () => ({
@@ -49,6 +199,7 @@ export const api = createApi({
           "x-cart-session": getCartSession(),
         },
       }),
+
       providesTags: ["Cart"],
     }),
 
@@ -61,6 +212,7 @@ export const api = createApi({
         },
         body,
       }),
+
       invalidatesTags: ["Cart"],
     }),
 
@@ -76,34 +228,6 @@ export const api = createApi({
         },
       }),
 
-      async onQueryStarted({ id, quantity }, { dispatch, queryFulfilled }) {
-        const patchResult = dispatch(
-          api.util.updateQueryData("getCart", undefined, (draft) => {
-            const item = draft.items.find((item) => item.id === id);
-
-            if (item) {
-              item.quantity = quantity;
-            }
-
-            draft.count = draft.items.reduce(
-              (sum, item) => sum + item.quantity,
-              0,
-            );
-
-            draft.total = draft.items.reduce(
-              (sum, item) => sum + item.product.price * item.quantity,
-              0,
-            );
-          }),
-        );
-
-        try {
-          await queryFulfilled;
-        } catch {
-          patchResult.undo();
-        }
-      },
-
       invalidatesTags: ["Cart"],
     }),
 
@@ -116,29 +240,7 @@ export const api = createApi({
         },
       }),
 
-      async onQueryStarted(id, { dispatch, queryFulfilled }) {
-        const patchResult = dispatch(
-          api.util.updateQueryData("getCart", undefined, (draft) => {
-            draft.items = draft.items.filter((item) => item.id !== id);
-
-            draft.count = draft.items.reduce(
-              (sum, item) => sum + item.quantity,
-              0,
-            );
-
-            draft.total = draft.items.reduce(
-              (sum, item) => sum + item.product.price * item.quantity,
-              0,
-            );
-          }),
-        );
-
-        try {
-          await queryFulfilled;
-        } catch {
-          patchResult.undo();
-        }
-      },
+      invalidatesTags: ["Cart"],
     }),
 
     clearCart: builder.mutation({
@@ -150,34 +252,17 @@ export const api = createApi({
         },
       }),
 
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        const patchResult = dispatch(
-          api.util.updateQueryData("getCart", undefined, (draft) => {
-            draft.items = [];
-            draft.total = 0;
-            draft.count = 0;
-          }),
-        );
-
-        try {
-          await queryFulfilled;
-        } catch {
-          patchResult.undo();
-        }
-      },
+      invalidatesTags: ["Cart"],
     }),
 
     createOrder: builder.mutation({
       query: (data) => ({
         url: "/checkout",
-
         method: "POST",
-
-        body: data,
-
         headers: {
           "x-cart-session": getCartSession(),
         },
+        body: data,
       }),
     }),
   }),
@@ -186,12 +271,34 @@ export const api = createApi({
 export const {
   useGetProductsQuery,
   useGetProductByIdQuery,
+
   useGetCategoriesQuery,
+  useCreateCategoryMutation,
+  useDeleteCategoryMutation,
+
   useGetBrandsQuery,
+  useCreateBrandMutation,
+  useDeleteBrandMutation,
+
+  useGetAdminProductsQuery,
+  useCreateProductMutation,
+  useDeleteProductMutation,
+
+  useUploadImageMutation,
+
+  useLoginAdminMutation,
+
+  useGetDashboardQuery,
+
+  useGetOrdersQuery,
+  useGetOrderByIdQuery,
+  useUpdateOrderStatusMutation,
+
   useGetCartQuery,
   useAddToCartMutation,
   useUpdateCartItemMutation,
   useRemoveCartItemMutation,
   useClearCartMutation,
+
   useCreateOrderMutation,
 } = api;
