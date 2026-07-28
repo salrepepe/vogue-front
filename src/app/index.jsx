@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import "../App.css";
 import { useEffect } from "react";
 // import { useEffect } from "react";
-import useLenis from "../features/Lenis";
+import useLenis from "../features/lenis.js";
 // import ScrollToTop from "../features/ScrollToTop";
 import AdminLayout from "../admin/components/AdminLayout";
 
