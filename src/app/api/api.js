@@ -5,8 +5,8 @@ export const api = createApi({
   reducerPath: "api",
 
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5500/api",
-    // baseUrl: "https://vogue-back.onrender.com/api",
+    // baseUrl: "http://localhost:5500/api",
+    baseUrl: "https://vogue-back.onrender.com/api",
 
 
     prepareHeaders: (headers) => {
