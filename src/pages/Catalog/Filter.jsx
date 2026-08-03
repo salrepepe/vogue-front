@@ -16,7 +16,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Search from "../../assets/icons/search";
 
-const Filter = ({ t }) => {
+const Filter = ({ t, brand }) => {
   const { data: brands, isLoading: isBrandsLoading } = useGetBrandsQuery();
   const { data: categories, isLoading: isCategoriesLoading } =
     useGetCategoriesQuery();
@@ -73,34 +73,80 @@ const Filter = ({ t }) => {
     setSearch(params.get("search") || "");
   }, [params]);
   // CATEGORY CLICK
-  const renderCategories = (nodes = []) =>
-    nodes.map((cat) => (
-      <div key={cat.id} style={{ marginLeft: 8 }}>
-        <p
-          onClick={() =>
-            updateFilters({
-              category: cat.fullPath.replace("/", ""),
-            })
-          }
-          style={{
-            cursor: "pointer",
-            fontSize: 14,
-            color:
-              params.get("category") === cat.fullPath.replace("/", "")
-                ? "#000"
-                : "#777",
-            fontWeight:
-              params.get("category") === cat.fullPath.replace("/", "")
-                ? 600
-                : 400,
+
+  const renderCategories = (nodes = [], level = 0) =>
+    nodes.map((cat) => {
+      const selected = params.get("category") === cat.fullPath.replace("/", "");
+      const hasChildren = cat.children?.length > 0;
+
+      if (!hasChildren) {
+        return (
+          <Box
+            key={cat.id}
+            sx={{
+              ml: level * 2,
+              py: 0.5,
+              cursor: "pointer",
+              color: selected ? "#000" : "#777",
+              fontWeight: selected ? 600 : 400,
+            }}
+            onClick={() =>
+              updateFilters({
+                category: cat.fullPath.replace("/", ""),
+              })
+            }
+          >
+            {cat.name}
+          </Box>
+        );
+      }
+
+      return (
+        <Accordion
+          key={cat.id}
+          disableGutters
+          elevation={0}
+          sx={{
+            ml: level * 2,
+            boxShadow: "none",
+            "&::before": {
+              display: "none",
+            },
           }}
         >
-          {cat.name}
-        </p>
+          <AccordionSummary
+            expandIcon={<ExpandMore />}
+            sx={{
+              minHeight: 40,
+              "& .MuiAccordionSummary-content": {
+                my: 0,
+              },
+            }}
+          >
+            <Box
+              onClick={(e) => {
+                e.stopPropagation();
 
-        {cat.children?.length > 0 && renderCategories(cat.children)}
-      </div>
-    ));
+                updateFilters({
+                  category: cat.fullPath.replace("/", ""),
+                });
+              }}
+              sx={{
+                cursor: "pointer",
+                color: selected ? "#000" : "#777",
+                fontWeight: selected ? 600 : 400,
+              }}
+            >
+              {cat.name}
+            </Box>
+          </AccordionSummary>
+
+          <AccordionDetails sx={{ p: 0 }}>
+            {renderCategories(cat.children, level + 1)}
+          </AccordionDetails>
+        </Accordion>
+      );
+    });
 
   return (
     <>
@@ -128,12 +174,7 @@ const Filter = ({ t }) => {
           border: "1px solid #ddd",
           borderRadius: "10px",
           "& p": { fontSize: 14, cursor: "pointer", color: "#777" },
-          "& .MuiPaper-root": {
-            boxShadow: "none",
-            border: "1px solid #CCC",
-            borderRadius: "4px!important",
-            mb: 2,
-          },
+
           "& .MuiButtonBase-root": {
             minHeight: "32px!important",
             p: 1,
@@ -150,95 +191,118 @@ const Filter = ({ t }) => {
           {t("catalog.filter")}
         </Typography>
 
-        {/* SORT */}
-        <Accordion defaultExpanded>
-          <AccordionSummary expandIcon={<ExpandMore />}>
-            Сортировка
-          </AccordionSummary>
+        <Box
+          sx={{
+            "& .MuiPaper-root": {
+              boxShadow: "none",
+              border: "1px solid #CCC",
+              borderRadius: "4px!important",
+              mb: 2,
+            },
+          }}
+        >
+          {/* SORT */}
+          <Accordion defaultExpanded>
+            <AccordionSummary expandIcon={<ExpandMore />}>
+              Сортировка
+            </AccordionSummary>
 
-          <AccordionDetails>
-            <p
-              style={{
-                color: !params.get("sort") ? "#000" : "#777",
-              }}
-              onClick={() => setFilter("sort", "")}
-            >
-              {t("catalog.default")}
-            </p>
-            <p
-              style={{
-                color: params.get("sort") === "price_asc" ? "#000" : "#777",
-              }}
-              onClick={() => setFilter("sort", "price_asc")}
-            >
-              {t("catalog.priceAsc")}
-            </p>
-            <p
-              style={{
-                color: params.get("sort") === "price_desc" ? "#000" : "#777",
-              }}
-              onClick={() => setFilter("sort", "price_desc")}
-            >
-              {t("catalog.priceDesc")}
-            </p>
-          </AccordionDetails>
-        </Accordion>
+            <AccordionDetails>
+              <p
+                style={{
+                  color: !params.get("sort") ? "#000" : "#777",
+                }}
+                onClick={() => setFilter("sort", "")}
+              >
+                {t("catalog.default")}
+              </p>
+              <p
+                style={{
+                  color: params.get("sort") === "price_asc" ? "#000" : "#777",
+                }}
+                onClick={() => setFilter("sort", "price_asc")}
+              >
+                {t("catalog.priceAsc")}
+              </p>
+              <p
+                style={{
+                  color: params.get("sort") === "price_desc" ? "#000" : "#777",
+                }}
+                onClick={() => setFilter("sort", "price_desc")}
+              >
+                {t("catalog.priceDesc")}
+              </p>
+            </AccordionDetails>
+          </Accordion>
+          {/* BRAND */}
+          {!brand && (
+            <Accordion defaultExpanded>
+              <AccordionSummary expandIcon={<ExpandMore />}>
+                {t("catalog.brand")}
+              </AccordionSummary>
 
-        {/* BRAND */}
-        <Accordion defaultExpanded>
-          <AccordionSummary expandIcon={<ExpandMore />}>
-            {t("catalog.brand")}
-          </AccordionSummary>
-
-          <AccordionDetails>
-            {isBrandsLoading ? (
-              Array.from({ length: 12 }).map((_, index) => (
-                <Skeleton
-                  variant="text"
-                  width="70%"
-                  sx={{ fontSize: "1rem" }}
-                  key={index}
-                />
-              ))
-            ) : (
-              <>
-                {" "}
-                <p
-                  onClick={() => {
-                    updateFilters({
-                      brand: "",
-                    });
-                  }}
-                  style={{
-                    cursor: "pointer",
-                    color: params.get("brand") === null ? "#000" : "#777",
-                  }}
-                >
-                  Любой
-                </p>
-                {brands?.map((b) => (
-                  <p
-                    key={b.id}
-                    onClick={() =>
-                      updateFilters({
-                        brand: b.slug,
-                      })
-                    }
-                    style={{
-                      cursor: "pointer",
-                      color: params.get("brand") === b.slug ? "#000" : "#777",
-                    }}
-                  >
-                    {b.name}
-                  </p>
-                ))}
-              </>
-            )}
-          </AccordionDetails>
-        </Accordion>
+              <AccordionDetails>
+                {isBrandsLoading ? (
+                  Array.from({ length: 12 }).map((_, index) => (
+                    <Skeleton
+                      variant="text"
+                      width="70%"
+                      sx={{ fontSize: "1rem" }}
+                      key={index}
+                    />
+                  ))
+                ) : (
+                  <>
+                    {" "}
+                    <p
+                      onClick={() => {
+                        updateFilters({
+                          brand: "",
+                        });
+                      }}
+                      style={{
+                        cursor: "pointer",
+                        color: params.get("brand") === null ? "#000" : "#777",
+                      }}
+                    >
+                      Любой
+                    </p>
+                    {brands?.map((b) => (
+                      <p
+                        key={b.id}
+                        onClick={() =>
+                          updateFilters({
+                            brand: b.slug,
+                          })
+                        }
+                        style={{
+                          cursor: "pointer",
+                          color:
+                            params.get("brand") === b.slug ? "#000" : "#777",
+                        }}
+                      >
+                        {b.name}
+                      </p>
+                    ))}
+                  </>
+                )}
+              </AccordionDetails>
+            </Accordion>
+          )}
+        </Box>
 
         {/* CATEGORY */}
-        <Accordion defaultExpanded>
+        <Accordion
+          defaultExpanded
+          sx={{
+            "&.MuiPaper-root": {
+              boxShadow: "none",
+              border: "1px solid #CCC",
+              borderRadius: "4px!important",
+              mb: 2,
+            },
+          }}
+        >
           <AccordionSummary expandIcon={<ExpandMore />}>
             {t("catalog.catalog")}
           </AccordionSummary>

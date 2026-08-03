@@ -6,12 +6,15 @@ const Footer = ({ t }) => {
     <Box
       component="footer"
       sx={{
+        mt: 6,
         background: "#F3F3F3",
         padding: "70px 0 133px",
       }}
     >
       <Container>
-        <Typography sx={{textAlign:'center', mb:5}} variant="h2">{t("nav.contacts")}</Typography>
+        <Typography sx={{ textAlign: "center", mb: 5 }} variant="h2">
+          {t("nav.contacts")}
+        </Typography>
         <Box
           sx={{
             display: "flex",

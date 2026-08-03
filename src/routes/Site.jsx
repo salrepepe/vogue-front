@@ -47,7 +47,7 @@ const Site = ({ t }) => {
           {/* PRODUCT DETAILS */}
           <Route path="/catalog/:slug/:id" element={<Details t={t} />} />
           <Route path="/checkout" element={<Chekout t={t} />} />
-          <Route path="/catalog/:brand" element={<Brand t={t} />} />
+          <Route path="/catalog/brand/:brand/:id" element={<Brand t={t} />} />
         </Routes>
       </Box>
       <Footer t={t} />

@@ -39,8 +39,8 @@
     "add_to_cart": "В корзину",
     "buy_now": "Купить сейчас",
     "quantity": "Количество",
-    "currentSize": "Текущий размер",
-    "currentColor": "Текущая расцветка",
+    "currentSize": "Доступные размеры",
+    "currentColor": "Доступные расцветки",
     "price": "Стоимость",
     "learnMore": "Узнать о товаре"
   },

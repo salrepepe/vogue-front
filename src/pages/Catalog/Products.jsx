@@ -66,9 +66,12 @@ const Products = ({ filters }) => {
             sx={{
               display: "table",
               m: "0 auto",
+              p: 16,
+              color: "#999999",
             }}
+            variant="h3"
           >
-            По вашему запросу ничего не найдено :)
+            По вашему запросу ничего не найдено
           </Typography>
         ) : (
           products.map((p) => (
@@ -79,23 +82,27 @@ const Products = ({ filters }) => {
         )}
       </Grid>
 
-      <Box sx={{ display: "flex", justifyContent: "center", py: 2, mt: 4 }}>
-        <Pagination
-          count={pagination?.pages || 1}
-          page={pagination?.page || 1}
-          shape="rounded"
-          onChange={(e, value) => {
-            setFilter("page", value);
+      {products.length ? (
+        <Box sx={{ display: "flex", justifyContent: "center", py: 2, mt: 4 }}>
+          <Pagination
+            count={pagination?.pages || 1}
+            page={pagination?.page || 1}
+            shape="rounded"
+            onChange={(e, value) => {
+              setFilter("page", value);
 
-            // setSearchParams(searchParams);
+              // setSearchParams(searchParams);
 
-            window.scrollTo({
-              top: 0,
-              behavior: "smooth",
-            });
-          }}
-        />
-      </Box>
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
+            }}
+          />
+        </Box>
+      ) : (
+        ""
+      )}
     </Box>
   );
 };

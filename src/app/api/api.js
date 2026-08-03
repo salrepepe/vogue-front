@@ -18,7 +18,7 @@ export const api = createApi({
     },
   }),
 
-  tagTypes: ["Product", "Category", "Brand", "Orders", "Cart"],
+  tagTypes: ["Product", "Category", "Brand", "Orders", "Cart", "Size", "Color"],
 
   endpoints: (builder) => ({
     // ======================
@@ -52,7 +52,7 @@ export const api = createApi({
     // ======================
 
     getCategories: builder.query({
-      query: () => "/categories",
+      query: () => "/categories/tree",
       providesTags: ["Category"],
     }),
 
@@ -81,6 +81,12 @@ export const api = createApi({
 
     getBrands: builder.query({
       query: () => "/brands",
+      providesTags: ["Brand"],
+    }),
+
+    getBrandById: builder.query({
+      query: (id) => `/brands/${id}`,
+
       providesTags: ["Brand"],
     }),
 
@@ -188,6 +194,62 @@ export const api = createApi({
       invalidatesTags: ["Orders"],
     }),
 
+    getSizes: builder.query({
+      query: () => "/admin/sizes",
+
+      providesTags: ["Size"],
+    }),
+
+    createSize: builder.mutation({
+      query: (body) => ({
+        url: "/admin/sizes",
+
+        method: "POST",
+
+        body,
+      }),
+
+      invalidatesTags: ["Size"],
+    }),
+
+    deleteSize: builder.mutation({
+      query: (id) => ({
+        url: `/admin/sizes/${id}`,
+
+        method: "DELETE",
+      }),
+
+      invalidatesTags: ["Size"],
+    }),
+
+    getColors: builder.query({
+      query: () => "/admin/colors",
+
+      providesTags: ["Color"],
+    }),
+
+    createColor: builder.mutation({
+      query: (body) => ({
+        url: "/admin/colors",
+
+        method: "POST",
+
+        body,
+      }),
+
+      invalidatesTags: ["Color"],
+    }),
+
+    deleteColor: builder.mutation({
+      query: (id) => ({
+        url: `/admin/colors/${id}`,
+
+        method: "DELETE",
+      }),
+
+      invalidatesTags: ["Color"],
+    }),
+
     // ======================
     // CART
     // ======================
@@ -265,6 +327,13 @@ export const api = createApi({
         body: data,
       }),
     }),
+    createDirectOrder: builder.mutation({
+      query: (data) => ({
+        url: "/checkout/direct",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -277,6 +346,7 @@ export const {
   useDeleteCategoryMutation,
 
   useGetBrandsQuery,
+  useGetBrandByIdQuery,
   useCreateBrandMutation,
   useDeleteBrandMutation,
 
@@ -300,5 +370,14 @@ export const {
   useRemoveCartItemMutation,
   useClearCartMutation,
 
+  useGetSizesQuery,
+  useCreateSizeMutation,
+  useDeleteSizeMutation,
+
+  useGetColorsQuery,
+  useCreateColorMutation,
+  useDeleteColorMutation,
+
   useCreateOrderMutation,
+  useCreateDirectOrderMutation,
 } = api;

@@ -86,7 +86,7 @@ const Cart = ({ open, setOpen, t }) => {
       </Box>
 
       {!cart?.count ? (
-        <Typography sx={{ textAlign: "center" }}>
+        <Typography sx={{ textAlign: "center", p: 8 }}>
           Ваша корзина пуста :(
         </Typography>
       ) : (

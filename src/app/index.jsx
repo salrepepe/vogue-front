@@ -1,11 +1,10 @@
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "../theme";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Site from "../routes/Site";
 import ProtectedRoute from "../routes/ProtectedRoute";
 import { useTranslation } from "react-i18next";
 import "../App.css";
-import { useEffect } from "react";
 // import { useEffect } from "react";
 import useLenis from "../features/lenis.js";
 // import ScrollToTop from "../features/ScrollToTop";
@@ -19,20 +18,18 @@ import Brands from "../admin/pages/Brands";
 import OrderDetails from "../admin/pages/OrderDetails";
 import ProductCreate from "../admin/pages/ProductCreate";
 import AdminLogin from "../admin/pages/AdminLogin";
+import ScrollToTop from "../features/ScrollToTop.jsx";
+import Sizes from "../admin/pages/Sizes.jsx";
+import Colors from "../admin/pages/Colors.jsx";
 
 const App = () => {
   const { t } = useTranslation();
-  const location = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
 
   useLenis();
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <ScrollToTop /> */}
+      <ScrollToTop />
       <Routes>
         {/* Сайт */}
         <Route path="/*" element={<Site t={t} />} />
@@ -62,6 +59,8 @@ const App = () => {
           <Route path="categories" element={<Categories />} />
 
           <Route path="brands" element={<Brands />} />
+          <Route path="sizes" element={<Sizes />} />
+          <Route path="colors" element={<Colors />} />
         </Route>
       </Routes>
     </ThemeProvider>

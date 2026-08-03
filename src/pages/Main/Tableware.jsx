@@ -5,31 +5,32 @@ import img1 from "../../assets/images/others.png";
 import img3 from "../../assets/images/vazy.png";
 import img4 from "../../assets/images/polo.png";
 import tableware from "../../assets/images/tableware.png";
+import { Link } from "react-router-dom";
 
 const Tableware = ({ t }) => {
   const categories = [
     {
       id: 1,
       name: "Посуда",
-      slug: "/catalog?category=women%2Fclothes",
+      slug: "/catalog?page=1&category=posuda",
       image: img2,
     },
     {
       id: 2,
       name: "Вазы",
-      slug: "/catalog?category=women%2Fshoes",
+      slug: "/catalog?page=1&category=vazy",
       image: img3,
     },
     {
       id: 3,
       name: "Полотенце",
-      slug: "/catalog?category=women%2Fshoes",
+      slug: "/catalog?page=1&category=polotence",
       image: img4,
     },
     {
       id: 4,
       name: "Для дома",
-      slug: "/catalog?category=women%2Fshoes",
+      slug: "/catalog?page=1&category=dlya-doma",
       image: img1,
     },
   ];
@@ -58,7 +59,7 @@ const Tableware = ({ t }) => {
         <Grid container spacing={2}>
           {categories.map((item, index) => (
             <Grid size={{ xs: 6, sm: 6, md: 3 }} key={index}>
-              <Box sx={{}}>
+              <Link to={item.slug} sx={{}}>
                 <img
                   src={item.image}
                   width="100%"
@@ -69,20 +70,22 @@ const Tableware = ({ t }) => {
                 <Typography sx={{ mt: "20px", textAlign: "center" }}>
                   {item.name}
                 </Typography>
-              </Box>
+              </Link>
             </Grid>
           ))}
         </Grid>
-        <Button
-          sx={{
-            m: { xs: "25px auto", md: "62px auto 70px" },
-            display: "block",
-          }}
-          variant="outlined"
-          size="medium"
-        >
-          {t("nav.see_more")}
-        </Button>
+        {/* <Link to={`/catalog?category`}>
+          <Button
+            sx={{
+              m: { xs: "25px auto", md: "62px auto 70px" },
+              display: "block",
+            }}
+            variant="outlined"
+            size="medium"
+          >
+            {t("nav.see_more")}
+          </Button>
+        </Link> */}
       </Container>
     </section>
   );

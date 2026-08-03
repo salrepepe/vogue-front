@@ -28,6 +28,7 @@ const First = () => {
         width="100%"
         alt=""
       />
+      
       <Box
         component="img"
         src={logo}

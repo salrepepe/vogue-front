@@ -46,11 +46,19 @@ const CartItem = memo(function CartItem({ idx, item, checkout }) {
               whiteSpace: "nowrap",
             }}
           >
-            {item?.product?.name}
+            {item?.product?.name} {item?.size?.name} 
           </Typography>
           <Typography sx={{ color: "#777" }} variant="h6">
-            {item?.product?.brand.name}
+            {item?.product?.brand.name} 
           </Typography>
+          <Box
+            sx={{
+              width: 10,
+              height: 10,
+              borderRadius: "50%",
+              background: item.color?.hex,
+            }}
+          />
           <Box
             sx={{
               mt: 2,

@@ -1,8 +1,22 @@
 import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAddToCartMutation } from "../../app/api/api";
+import { useState } from "react";
 
 const Card = ({ item }) => {
+  const [added, setAdded] = useState(false);
+
+  const [addToCart] = useAddToCartMutation();
+
+  const handleAdd = () => {
+    addToCart({
+      productId: item.id,
+      quantity: 1,
+    });
+    setAdded(true);
+  };
+
   return (
     <Box
       sx={{
@@ -55,9 +69,11 @@ const Card = ({ item }) => {
         fullWidth
         sx={{ p: 1, fontSize: 17 }}
         size="small"
-        variant="outlined"
+        variant={added ? "outlined" : "contained"}
+        onClick={handleAdd}
+        disabled={added}
       >
-        добавить в корзину
+        {added ? "Добавлено" : "добавить в корзину"}
       </Button>
     </Box>
   );

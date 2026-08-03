@@ -65,7 +65,7 @@ const Women = ({ t }) => {
               }}
             >
               {data?.map((item, idx) => (
-                <Link to={`/catalog/${item.slug}`} key={idx}>
+                <Link to={`/catalog/brand/${item.slug}/${item.id}`} key={idx}>
                   <img src={item.logo} alt="" />
                 </Link>
               ))}

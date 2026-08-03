@@ -2,174 +2,202 @@ import {
   Box,
   Button,
   FormControl,
-  InputLabel,
   MenuItem,
   Select,
   Skeleton,
   Typography,
 } from "@mui/material";
+
 import React, { useState } from "react";
+
 import { useAddToCartMutation } from "../../app/api/api";
 import { useNavigate } from "react-router-dom";
 
-const Description = ({ t, product, isLoading }) => {
+const Description = ({ t, product, isLoading, setImages }) => {
   const [added, setAdded] = useState(false);
-  const [selectedVariant, setSelectedVariant] = useState({});
+
+  const [selectedVariant, setSelectedVariant] = useState({
+    size: null,
+    color: null,
+  });
 
   const navigate = useNavigate();
 
-  const sizes = [
-    ...new Set(product?.variants?.map((v) => ({ name: v.size, id: v.id }))),
-  ];
-  const colors = [
-    ...new Set(product?.variants?.map((v) => ({ name: v.color, id: v.id }))),
-  ];
+  const sizes = product?.sizes || [];
+  const colors = product?.colors || [];
 
   const [addToCart] = useAddToCartMutation();
 
   const handleChangeSize = (event) => {
-    setSelectedVariant({ ...selectedVariant, size: event.target.value });
-  };
-  const handleChangeColor = (event) => {
-    setSelectedVariant({ ...selectedVariant, color: event.target.value });
+    setSelectedVariant({
+      ...selectedVariant,
+      size: event.target.value,
+    });
   };
 
-  const handleAdd = () => {
-    addToCart({
+  const handleColor = (color) => {
+    setSelectedVariant({
+      ...selectedVariant,
+      color: color.id,
+    });
+
+    // меняем картинки
+    setImages(color.images || []);
+  };
+
+  const handleAdd = async () => {
+    await addToCart({
       productId: product.id,
-      variantId: selectedVariant.size,
+
+      sizeId: selectedVariant.size,
+
+      colorId: selectedVariant.color,
+
       quantity: 1,
     });
+
     setAdded(true);
+  };
+
+  const handleBuyNow = () => {
+    navigate("/checkout", {
+      state: {
+        product,
+
+        sizeId: selectedVariant.size,
+
+        colorId: selectedVariant.color,
+
+        quantity: 1,
+
+        buyNow: true,
+      },
+    });
   };
 
   return (
     <Box
       component="section"
       sx={{
-        borderRadius: "4px",
         border: "1px solid #CCC",
+        borderRadius: "4px",
         p: "28px 20px",
-        "& .MuiSelect-select": {
-          minHeight: "unset",
-          p: 1,
-          borderRadius: "4px",
-        },
-        "& .MuiInputBase-root": {
-          borderRadius: "4px",
-        },
       }}
     >
       {isLoading ? (
-        <>
-          <Skeleton
-            sx={{ m: "0 auto", fontSize: "24px" }}
-            variant="text"
-            width={100}
-          />{" "}
-          <Skeleton
-            sx={{ m: "0 auto", fontSize: "24px" }}
-            variant="text"
-            width={100}
-          />
-        </>
+        <Skeleton variant="text" />
       ) : (
-        <Typography sx={{ fontSize: 24, textAlign: "center" }}>
+        <Typography
+          sx={{
+            fontSize: 24,
+            textAlign: "center",
+          }}
+        >
           {product?.name}
         </Typography>
       )}
 
-      {isLoading ? (
-        <Skeleton
-          sx={{ m: "0 auto", fontSize: 24 }}
-          variant="text"
-          width="80%"
-        />
-      ) : (
-        <Typography
-          variant="h5"
-          sx={{
-            color: "#CCC",
-            maxWidth: 134,
-            m: "0 auto 24px",
-            textAlign: "center",
-          }}
-        >
-          {product?.brand?.name}
-        </Typography>
-      )}
-
-      <Typography variant="h4" sx={{ mb: 1 }}>
-        {t("product.currentSize")}
+      <Typography
+        variant="h5"
+        sx={{
+          color: "#CCC",
+          textAlign: "center",
+          mb: 3,
+        }}
+      >
+        {product?.brand?.name}
       </Typography>
+
+      <Typography variant="h4">{t("product.currentSize")}</Typography>
+
       <FormControl fullWidth>
-        {/* <InputLabel id="demo-simple-select-">{</InputLabel> */}
         <Select onChange={handleChangeSize}>
           {sizes.map((size) => (
-            <MenuItem key={size.name} value={size.id}>
+            <MenuItem key={size.id} value={size.id}>
               {size.name}
             </MenuItem>
           ))}
         </Select>
       </FormControl>
-      <Typography variant="h4" sx={{ m: "24px 0 8px" }}>
+
+      <Typography
+        variant="h4"
+        sx={{
+          mt: 3,
+        }}
+      >
         {t("product.currentColor")}
       </Typography>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">{product?.color}</InputLabel>
 
-        <Select onChange={handleChangeColor}>
-          {colors.map((color) => (
-            <MenuItem key={color.name} value={color.id}>
-              {color.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <Typography
+      <Box
         sx={{
-          color: "#CCC",
-          mt: 5,
-          textAlign: "center",
+          display: "flex",
+          gap: 1,
         }}
-        variant="h5"
       >
-        {t("product.price")}
+        {colors.map((color) => (
+          <Box
+            key={color.id}
+            onClick={() => handleColor(color)}
+            sx={{
+              width: 25,
+              height: 25,
+
+              borderRadius: "50%",
+
+              backgroundColor: color.hex,
+
+              cursor: "pointer",
+
+              border:
+                selectedVariant.color === color.id
+                  ? "2px solid black"
+                  : "1px solid #ccc",
+            }}
+          />
+        ))}
+      </Box>
+
+      <Typography
+        variant="h3"
+        sx={{
+          textAlign: "center",
+          mt: 3,
+        }}
+      >
+        {product?.price}$
       </Typography>
-      <Typography variant="h3" sx={{ textAlign: "center", mt: 1 }}>
-        {isLoading ? 0 : product?.price}$
-      </Typography>
+
       <Button
-        variant={added ? "outlined" : "contained"}
-        onClick={handleAdd}
-        disabled={added}
-        sx={{ mt: "24px" }}
-        size="large"
         fullWidth
+        sx={{ mt: 3 }}
+        variant={added ? "outlined" : "contained"}
+        disabled={added}
+        onClick={handleAdd}
       >
         {added ? "Добавлено" : t("product.add_to_cart")}
       </Button>
-      {/* <Button
-        variant="contained"
-        sx={{ m: "16px 0 16px" }}
-        size="large"
-        color="secondary"
+
+      <Button
         fullWidth
-        onClick={() => {
-          handleAdd()
-          navigate("/checkout");
-        }}
+        sx={{ mt: 2 }}
+        variant="contained"
+        color="secondary"
+        onClick={handleBuyNow}
       >
         {t("product.buy_now")}
-      </Button> */}
+      </Button>
       <Button
+        href={`https://wa.me/996998150391?text=Здравсвуйте! хотелось узнать о товаре "${product?.name}"`}
+        target="_blank"
         variant="outlined"
         sx={{ m: "16px 0 0" }}
         size="large"
         color="primary"
         fullWidth
       >
-        {t("product.learnMore")}
+        {" "}
+        {t("product.learnMore")}{" "}
       </Button>
     </Box>
   );

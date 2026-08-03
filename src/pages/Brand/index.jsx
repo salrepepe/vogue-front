@@ -13,17 +13,23 @@ import Products from "../Catalog/Products";
 import SideBar from "../Catalog/SideBar";
 import Brands from "../Catalog/Brands";
 import Filter from "../Catalog/Filter";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
+import { useGetBrandByIdQuery } from "../../app/api/api";
 
 const Brand = ({ t }) => {
   const md = useMediaQuery("(min-width:900px)");
+
+  const { brand, id } = useParams();
+
+  const { data, isLoading } = useGetBrandByIdQuery(id);
+
   const [open, setOpen] = useState(false);
 
   const [params] = useSearchParams();
 
   const filters = {
     category: params.get("category"),
-    brand: params.get("brand"),
+    brand: brand,
     search: params.get("search"),
     page: params.get("page") || 1,
     sort: params.get("sort"),
@@ -45,7 +51,7 @@ const Brand = ({ t }) => {
     <>
       <Box
         sx={{
-          background: `url(${boss}) center/cover no-repeat;`,
+          background: `url(${data?.banner}) left/cover no-repeat;`,
           padding: "31px 0",
           height: "100vh",
         }}
@@ -56,11 +62,11 @@ const Brand = ({ t }) => {
         <SideBar open={open} setOpen={setOpen} t={t} />
       </Box>
       <Container sx={{ mt: 4 }} maxWidth="xl">
-        {md && <Brands t={t} b />}{" "}
+        {/* {md && <Brands t={t} b />}{" "} */}
         <Grid container spacing={2}>
           {md && (
             <Grid size={{ md: 3, xl: 2 }}>
-              <Filter t={t} />
+              <Filter brand t={t} />
             </Grid>
           )}
           {!md && (

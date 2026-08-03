@@ -22,6 +22,15 @@ const menu = [
     title: "Бренды",
     path: "/admin/brands",
   },
+  {
+    title: "Размеры",
+    path: "/admin/sizes",
+  },
+
+  {
+    title: "Цвета",
+    path: "/admin/colors",
+  },
 ];
 
 const Sidebar = () => {

@@ -10,6 +10,7 @@ import {
   LinearProgress,
   Snackbar,
   Alert,
+  Autocomplete,
 } from "@mui/material";
 import { useFormik, FormikProvider, FieldArray } from "formik";
 import * as Yup from "yup";
@@ -17,6 +18,8 @@ import {
   useCreateProductMutation,
   useGetBrandsQuery,
   useGetCategoriesQuery,
+  useGetColorsQuery,
+  useGetSizesQuery,
 } from "../../app/api/api";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -47,7 +50,8 @@ const ProductCreate = () => {
       price: "",
       images: [],
 
-      variants: [],
+      sizes: [],
+      colors: [],
     },
 
     validationSchema,
@@ -66,7 +70,9 @@ const ProductCreate = () => {
 
         categoryId: values.categoryId,
 
-        variants: values.variants,
+        sizes: values.sizes,
+
+        colors: values.colors,
       });
 
       // navigate("/admin/products");
@@ -75,6 +81,8 @@ const ProductCreate = () => {
 
   const { data: brands = [] } = useGetBrandsQuery();
   const { data: categories = [] } = useGetCategoriesQuery();
+  const { data: colors = [] } = useGetColorsQuery();
+  const { data: sizes = [] } = useGetSizesQuery();
 
   const renderCategoryOptions = (categories, level = 0) => {
     return categories.flatMap((category) => [
@@ -183,7 +191,89 @@ const ProductCreate = () => {
             </Select>
           </FormControl>
           <MultiImageUploader value={images} onChange={setImages} />
-          <FieldArray name="variants">
+          <FormControl fullWidth sx={{ mb: 3 }}>
+            <InputLabel>Размеры</InputLabel>
+
+            <Select
+              multiple
+              name="sizes"
+              value={formik.values.sizes}
+              label="Размеры"
+              onChange={formik.handleChange}
+            >
+              {sizes.map((size) => (
+                <MenuItem key={size.id} value={size.id}>
+                  {size.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+          <FormControl fullWidth sx={{ mb: 3 }}>
+            <InputLabel>Цвета</InputLabel>
+
+            <Select
+              multiple
+              value={formik.values.colors.map((c) => c.colorId)}
+              label="Цвета"
+              onChange={(e) => {
+                const selected = e.target.value;
+
+                formik.setFieldValue(
+                  "colors",
+                  selected.map((id) => {
+                    const old = formik.values.colors.find(
+                      (c) => c.colorId === id,
+                    );
+
+                    return (
+                      old || {
+                        colorId: id,
+                        images: [],
+                      }
+                    );
+                  }),
+                );
+              }}
+            >
+              {colors.map((color) => (
+                <MenuItem key={color.id} value={color.id}>
+                  {color.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Box sx={{ mb: 3 }}>
+            <Typography variant="h6">Фото цветов</Typography>
+
+            {formik.values.colors.map((item) => {
+              const color = colors.find((c) => c.id === item.colorId);
+
+              return (
+                <Box key={item.colorId} sx={{ mt: 2 }}>
+                  <Typography>{color?.name}</Typography>
+
+                  <MultiImageUploader
+                    value={item.images}
+                    onChange={(urls) => {
+                      formik.setFieldValue(
+                        "colors",
+                        formik.values.colors.map((c) =>
+                          c.colorId === item.colorId
+                            ? {
+                                ...c,
+                                images: urls,
+                              }
+                            : c,
+                        ),
+                      );
+                    }}
+                  />
+                </Box>
+              );
+            })}
+          </Box>
+          {/* <FieldArray name="variants">
             {({ push, remove }) => (
               <Box>
                 <Typography>Варианты</Typography>
@@ -197,19 +287,39 @@ const ProductCreate = () => {
                       mt: 2,
                     }}
                   >
-                    <TextField
-                      label="Размер"
-                      name={`variants.${index}.size`}
-                      value={formik.values.variants[index].size}
-                      onChange={formik.handleChange}
-                    />
+                    <FormControl fullWidth>
+                      <InputLabel>Размер</InputLabel>
 
-                    <TextField
-                      label="Цвет"
-                      name={`variants.${index}.color`}
-                      value={formik.values.variants[index].color}
-                      onChange={formik.handleChange}
-                    />
+                      <Select
+                        name={`variants.${index}.sizeId`}
+                        value={variant.sizeId}
+                        label="Размер"
+                        onChange={formik.handleChange}
+                      >
+                        {sizes.map((size) => (
+                          <MenuItem key={size.id} value={size.id}>
+                            {size.name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+
+                    <FormControl fullWidth>
+                      <InputLabel>Цвет</InputLabel>
+
+                      <Select
+                        name={`variants.${index}.colorId`}
+                        value={variant.colorId}
+                        label="Цвет"
+                        onChange={formik.handleChange}
+                      >
+                        {colors.map((color) => (
+                          <MenuItem key={color.id} value={color.id}>
+                            {color.name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
 
                     <Button color="error" onClick={() => remove(index)}>
                       Удалить
@@ -218,10 +328,11 @@ const ProductCreate = () => {
                 ))}
 
                 <Button
+                  sx={{ mt: 2 }}
                   onClick={() =>
                     push({
-                      size: "",
-                      color: "",
+                      sizeId: "",
+                      colorId: "",
                     })
                   }
                 >
@@ -229,7 +340,7 @@ const ProductCreate = () => {
                 </Button>
               </Box>
             )}
-          </FieldArray>
+          </FieldArray> */}
 
           <Button type="submit" variant="contained" size="large">
             Создать товар
