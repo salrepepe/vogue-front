@@ -5,7 +5,7 @@ export const api = createApi({
   reducerPath: "api",
 
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5500/api",
+    baseUrl: "https://vogue-back.onrender.com",
 
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("adminToken");
