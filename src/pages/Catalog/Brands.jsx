@@ -1,5 +1,4 @@
 import React from "react";
-import zara from "../../assets/images/zara.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Box, Container, Grid, Skeleton } from "@mui/material";

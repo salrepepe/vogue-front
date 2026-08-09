@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import img1 from "../../assets/images/man.png";
+import img1 from "../../assets/images/man.webp";
 import logo from "../../assets/images/logo.svg";
 
 import { motion, useScroll, useTransform } from "framer-motion";

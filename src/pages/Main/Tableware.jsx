@@ -1,10 +1,10 @@
 import React from "react";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
-import img2 from "../../assets/images/tableware-1.png";
-import img1 from "../../assets/images/others.png";
-import img3 from "../../assets/images/vazy.png";
-import img4 from "../../assets/images/polo.png";
-import tableware from "../../assets/images/tableware.png";
+import img2 from "../../assets/images/tableware-1.webp";
+import img1 from "../../assets/images/others.webp";
+import img3 from "../../assets/images/vazy.webp";
+import img4 from "../../assets/images/polo.webp";
+import tableware from "../../assets/images/tableware.webp";
 import { Link } from "react-router-dom";
 
 const Tableware = ({ t }) => {

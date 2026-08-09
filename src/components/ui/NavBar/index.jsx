@@ -9,7 +9,7 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import logoBlack from "../../../assets/images/logoBlack.png";
+import logoBlack from "../../../assets/images/logoBlack.svg";
 import Men from "./Men";
 import Women from "./Women";
 import Tableware from "./Tableware";

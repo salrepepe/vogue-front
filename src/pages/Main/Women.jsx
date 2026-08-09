@@ -12,18 +12,18 @@ import { Autoplay, EffectFade } from "swiper/modules";
 
 import { motion, useScroll, useTransform } from "framer-motion";
 
-import bg from "../../assets/images/women-bg.png";
+import bg from "../../assets/images/women-bg.webp";
 
-import v1 from "../../assets/images/v.png";
-import v2 from "../../assets/images/v2.png";
-import v3 from "../../assets/images/v3.png";
-import v4 from "../../assets/images/v4.png";
-import v5 from "../../assets/images/v5.png";
-import v6 from "../../assets/images/v6.png";
-import v7 from "../../assets/images/v7.png";
-import v8 from "../../assets/images/v8.png";
-import v9 from "../../assets/images/v9.png";
-import v10 from "../../assets/images/v10.png";
+import v1 from "../../assets/images/v.webp";
+import v2 from "../../assets/images/v2.webp";
+import v3 from "../../assets/images/v3.webp";
+import v4 from "../../assets/images/v4.webp";
+import v5 from "../../assets/images/v5.webp";
+import v6 from "../../assets/images/v6.webp";
+import v7 from "../../assets/images/v7.webp";
+import v8 from "../../assets/images/v8.webp";
+import v9 from "../../assets/images/v9.webp";
+import v10 from "../../assets/images/v10.webp";
 
 const MotionBox = motion(Box);
 

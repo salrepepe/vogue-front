@@ -1,5 +1,5 @@
 import logo from "../../assets/images/logo.png";
-import logoBlack from "../../assets/images/logo.png";
+import logoBlack from "../../assets/images/logoBlack.svg";
 import {
   Badge,
   Box,
