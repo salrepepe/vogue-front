@@ -19,9 +19,16 @@
     "sale": "Sale",
     "delivery": "Delivery",
     "perfume": "Perfume",
-    "contacts": "Contacts"
+    "contacts": "Contacts",
+    "dishes": "Dishes",
+    "vases": "Vases",
+    "towels": "Towels",
+    "fhome": "Home"
   },
   "catalog": {
+    "sort": "Sort",
+    "any": "Any",
+    "nothingFound": "Nothing was found for your request",
     "filter": "Filter",
     "new": "New Arrivals",
     "default": "Default",
@@ -45,9 +52,11 @@
     "learnMore": "Learn more about the product"
   },
   "cart": {
+    "addToCart": "Add to cart",
     "title": "Your cart",
     "total": "Total",
     "remove": "Remove",
+    "added": "Added",
     "empty": "Cart is empty",
     "clear": "Remove all items"
   },

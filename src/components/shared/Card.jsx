@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAddToCartMutation } from "../../app/api/api";
 
-const Card = ({ item }) => {
+const Card = ({ item, t }) => {
   const [added, setAdded] = useState(false);
   const [activeImage, setActiveImage] = useState(0);
 
@@ -157,7 +157,7 @@ const Card = ({ item }) => {
             borderRadius: 0,
           }}
         >
-          {added ? "Добавлено" : "Добавить в корзину"}
+          {added ? t("cart.added") : t("cart.addToCart")}
         </Button>
       </Box>
     </Box>

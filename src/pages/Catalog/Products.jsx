@@ -11,7 +11,7 @@ import Grid from "@mui/material/Grid";
 import { useGetProductsQuery } from "../../app/api/api";
 import { useSearchParams } from "react-router-dom";
 
-const Products = ({ filters }) => {
+const Products = ({ filters, t }) => {
   const md = useMediaQuery("(min-width:768px)");
 
   const { data, isLoading, isFetching } = useGetProductsQuery(filters);
@@ -71,12 +71,12 @@ const Products = ({ filters }) => {
             }}
             variant="h3"
           >
-            По вашему запросу ничего не найдено
+            {t("catalog.nothingFound")}
           </Typography>
         ) : (
           products.map((p) => (
             <Grid size={{ xs: 6, md: 4, lg: 4, xl: 3 }} key={p.id}>
-              <Card item={p} />
+              <Card t={t} item={p} />
             </Grid>
           ))
         )}

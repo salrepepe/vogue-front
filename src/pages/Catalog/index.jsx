@@ -48,7 +48,7 @@ const Catalog = ({ t }) => {
             </Box>
           )}
           <Grid size={{ xs: 12, md: 9, xl: 10 }}>
-            <Products filters={filters} />
+            <Products t={t} filters={filters} />
           </Grid>
         </Grid>
       </Container>

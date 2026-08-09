@@ -206,7 +206,7 @@ const Filter = ({ t, brand }) => {
           {/* SORT */}
           <Accordion defaultExpanded>
             <AccordionSummary expandIcon={<ExpandMore />}>
-              Сортировка
+             {t('catalog.sort')}
             </AccordionSummary>
 
             <AccordionDetails>
@@ -267,7 +267,7 @@ const Filter = ({ t, brand }) => {
                         color: params.get("brand") === null ? "#000" : "#777",
                       }}
                     >
-                      Любой
+                      {t('catalog.any')}
                     </p>
                     {brands?.map((b) => (
                       <p

@@ -11,25 +11,25 @@ const Tableware = ({ t }) => {
   const categories = [
     {
       id: 1,
-      name: "Посуда",
+      name: t("nav.dishes"),
       slug: "/catalog?page=1&category=posuda",
       image: img2,
     },
     {
       id: 2,
-      name: "Вазы",
+      name: t("nav.vases"),
       slug: "/catalog?page=1&category=vazy",
       image: img3,
     },
     {
       id: 3,
-      name: "Полотенце",
+      name: t("nav.towels"),
       slug: "/catalog?page=1&category=polotence",
       image: img4,
     },
     {
       id: 4,
-      name: "Для дома",
+      name: t("nav.fhome"),
       slug: "/catalog?page=1&category=dlya-doma",
       image: img1,
     },

@@ -181,7 +181,7 @@ const Description = ({ t, product, isLoading, setImages }) => {
         disabled={added}
         onClick={handleAdd}
       >
-        {added ? "Добавлено" : t("product.add_to_cart")}
+        {added ? t('cart.added') : t("product.add_to_cart")}
       </Button>
 
       <Button

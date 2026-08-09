@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   Box,
   Container,
-  Link,
   Typography,
   Breadcrumbs,
   Grid,
@@ -14,6 +13,7 @@ import Brands from "../Catalog/Brands";
 import Filter from "../Catalog/Filter";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useGetBrandByIdQuery } from "../../app/api/api";
+import { Link } from "react-router-dom";
 
 const Brand = ({ t }) => {
   const md = useMediaQuery("(min-width:900px)");
@@ -37,12 +37,12 @@ const Brand = ({ t }) => {
   const breadcrumbs = [
     <Link key="1" to="/">
       <Typography fontSize={{ xs: 14, md: 13 }} className="sans">
-        Главная
+        {t("nav.home")}
       </Typography>
     </Link>,
     <Link key="2" to="/catalog">
       <Typography fontSize={{ xs: 14, md: 13 }} className="sans" key="2">
-        Каталог
+        {t("nav.catalog")}
       </Typography>
     </Link>,
   ];
@@ -86,7 +86,7 @@ const Brand = ({ t }) => {
             </Box>
           )}
           <Grid size={{ xs: 12, md: 9, xl: 10 }}>
-            <Products filters={filters} />
+            <Products t={t} filters={filters} />
           </Grid>
         </Grid>
       </Container>

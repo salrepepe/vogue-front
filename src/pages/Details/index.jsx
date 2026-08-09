@@ -27,11 +27,11 @@ const Details = ({ t }) => {
 
   const breadcrumbs = [
     <Link key="1" to="/">
-      <Typography fontSize={{ xs: 14, md: 13 }}>Главная</Typography>
+      <Typography fontSize={{ xs: 14, md: 13 }}>{t("nav.home")}</Typography>
     </Link>,
 
     <Link key="2" to="/catalog">
-      <Typography fontSize={{ xs: 14, md: 13 }}>Каталог</Typography>
+      <Typography fontSize={{ xs: 14, md: 13 }}>{t("nav.catalog")}</Typography>
     </Link>,
 
     <Typography key="3">
@@ -45,7 +45,7 @@ const Details = ({ t }) => {
 
       <Grid
         container
-        sx={{ mt: 4, flexDirection: { xs: "column-reverse", md: "none" } }}
+        sx={{ mt: 4, flexDirection: { xs: "column-reverse", md: "unset" } }}
         spacing={4}
       >
         <Grid size={{ xs: 12, sm: 4, md: 8 }}>
