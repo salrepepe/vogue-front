@@ -76,7 +76,7 @@ const Filter = ({ t, brand }) => {
 
   const renderCategories = (nodes = [], level = 0) =>
     nodes.map((cat) => {
-      const selected = params.get("category") === cat.fullPath.replace("/", "");
+      const selected = params.get("category") === cat.fullPath;
       const hasChildren = cat.children?.length > 0;
 
       if (!hasChildren) {
@@ -93,7 +93,7 @@ const Filter = ({ t, brand }) => {
             }}
             onClick={() =>
               updateFilters({
-                category: cat.fullPath.replace("/", ""),
+                category: cat.fullPath,
               })
             }
           >
@@ -130,7 +130,7 @@ const Filter = ({ t, brand }) => {
                 e.stopPropagation();
 
                 updateFilters({
-                  category: cat.fullPath.replace("/", ""),
+                  category: cat.fullPath,
                 });
               }}
               sx={{
