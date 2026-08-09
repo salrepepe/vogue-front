@@ -1,24 +1,61 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getCartSession } from "../../utils/cartSession";
+import i18n from "../../i18n";
+
+// ======================
+// BASE QUERY
+// ======================
+
+const rawBaseQuery = fetchBaseQuery({
+  baseUrl: "https://vogue-back.onrender.com/api",
+  // baseUrl: "http://localhost:5500/api",
+
+  prepareHeaders: (headers) => {
+    const token = localStorage.getItem("adminToken");
+
+    if (token) {
+      headers.set("Authorization", `Bearer ${token}`);
+    }
+
+    return headers;
+  },
+});
+
+// ======================
+// LANGUAGE WRAPPER
+// ======================
+
+const baseQuery = async (args, api, extraOptions) => {
+  const language = i18n.language || "ru";
+
+  if (typeof args === "string") {
+    args = {
+      url: args,
+      params: {
+        lang: language,
+      },
+    };
+  } else {
+    args = {
+      ...args,
+      params: {
+        ...args.params,
+        lang: language,
+      },
+    };
+  }
+
+  return rawBaseQuery(args, api, extraOptions);
+};
+
+// ======================
+// API
+// ======================
 
 export const api = createApi({
   reducerPath: "api",
 
-  baseQuery: fetchBaseQuery({
-    // baseUrl: "http://localhost:5500/api",
-    baseUrl: "https://vogue-back.onrender.com/api",
-
-
-    prepareHeaders: (headers) => {
-      const token = localStorage.getItem("adminToken");
-
-      if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
-      }
-
-      return headers;
-    },
-  }),
+  baseQuery,
 
   tagTypes: ["Product", "Category", "Brand", "Orders", "Cart", "Size", "Color"],
 
@@ -31,15 +68,25 @@ export const api = createApi({
       query: (filters) => {
         const params = new URLSearchParams();
 
-        if (filters?.category) params.append("category", filters.category);
+        if (filters?.category) {
+          params.append("category", filters.category);
+        }
 
-        if (filters?.brand) params.append("brand", filters.brand);
+        if (filters?.brand) {
+          params.append("brand", filters.brand);
+        }
 
-        if (filters?.search) params.append("search", filters.search);
+        if (filters?.search) {
+          params.append("search", filters.search);
+        }
 
-        if (filters?.page) params.append("page", filters.page);
+        if (filters?.page) {
+          params.append("page", filters.page);
+        }
 
-        if (filters?.sort) params.append("sort", filters.sort);
+        if (filters?.sort) {
+          params.append("sort", filters.sort);
+        }
 
         return `/products?${params.toString()}`;
       },
@@ -88,7 +135,6 @@ export const api = createApi({
 
     getBrandById: builder.query({
       query: (id) => `/brands/${id}`,
-
       providesTags: ["Brand"],
     }),
 
@@ -196,18 +242,19 @@ export const api = createApi({
       invalidatesTags: ["Orders"],
     }),
 
+    // ======================
+    // SIZES
+    // ======================
+
     getSizes: builder.query({
       query: () => "/admin/sizes",
-
       providesTags: ["Size"],
     }),
 
     createSize: builder.mutation({
       query: (body) => ({
         url: "/admin/sizes",
-
         method: "POST",
-
         body,
       }),
 
@@ -217,25 +264,25 @@ export const api = createApi({
     deleteSize: builder.mutation({
       query: (id) => ({
         url: `/admin/sizes/${id}`,
-
         method: "DELETE",
       }),
 
       invalidatesTags: ["Size"],
     }),
 
+    // ======================
+    // COLORS
+    // ======================
+
     getColors: builder.query({
       query: () => "/admin/colors",
-
       providesTags: ["Color"],
     }),
 
     createColor: builder.mutation({
       query: (body) => ({
         url: "/admin/colors",
-
         method: "POST",
-
         body,
       }),
 
@@ -245,7 +292,6 @@ export const api = createApi({
     deleteColor: builder.mutation({
       query: (id) => ({
         url: `/admin/colors/${id}`,
-
         method: "DELETE",
       }),
 
@@ -319,6 +365,10 @@ export const api = createApi({
       invalidatesTags: ["Cart"],
     }),
 
+    // ======================
+    // CHECKOUT
+    // ======================
+
     createOrder: builder.mutation({
       query: (data) => ({
         url: "/checkout",
@@ -329,6 +379,7 @@ export const api = createApi({
         body: data,
       }),
     }),
+
     createDirectOrder: builder.mutation({
       query: (data) => ({
         url: "/checkout/direct",
@@ -338,6 +389,10 @@ export const api = createApi({
     }),
   }),
 });
+
+// ======================
+// HOOKS
+// ======================
 
 export const {
   useGetProductsQuery,

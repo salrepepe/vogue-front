@@ -2,24 +2,23 @@ import { Grid, Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Tableware = () => {
+const Tableware = ({ t }) => {
   const categories = [
     {
       id: 1,
-      name: "Посуда",
+      name: t("nav.tableware"),
       slug: "/catalog?page=1&category=posuda",
     },
     {
       id: 2,
-      name: "Вазы",
+      name: t("nav.vases"),
       slug: "/catalog?page=1&category=vazy",
     },
     {
       id: 3,
-      name: "Полотенце",
+      name: t("nav.towels"),
       slug: "/catalog?page=1&category=polotence",
     },
-
   ];
   return (
     <Grid container>

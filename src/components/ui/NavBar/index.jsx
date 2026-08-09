@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Drawer from "@mui/material/Drawer";
 import {
   Accordion,
@@ -16,12 +16,13 @@ import Tableware from "./Tableware";
 import Perfume from "./Perfume";
 import Menu from "../../../assets/icons/menu";
 import ExpandMore from "../../../assets/icons/ExpandMore";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import CategoriesMegaMenu from "../../shared/CategoriesMegaMenu";
 import { useGetCategoriesQuery } from "../../../app/api/api";
 import Contacts from "./Contacts";
 
 const NavBar = ({ open, setOpen, t }) => {
+  const location = useLocation();
   const { data = [], isLoading } = useGetCategoriesQuery();
 
   const md = useMediaQuery("(min-width:768px)");
@@ -33,12 +34,16 @@ const NavBar = ({ open, setOpen, t }) => {
   };
 
   const nav = [
-    { name: "мужские", slug: "muzhskoe" },
-    { name: "Женские", slug: "zhenshinam" },
-    { name: "Для дома", slug: "home" },
-    { name: "Парфюм", slug: "perfume" },
-    { name: "Контакты", slug: "contacts" },
+    { name: t("nav.men"), slug: "muzhskoe" },
+    { name: t("nav.women"), slug: "zhenshinam" },
+    { name: t("nav.fhome"), slug: "home" },
+    { name: t("nav.perfume"), slug: "perfume" },
+    { name: t("nav.contacts"), slug: "contacts" },
   ];
+
+  useEffect(() => {
+    setOpen(false);
+  }, [location]);
 
   return (
     <Drawer
@@ -123,11 +128,11 @@ const NavBar = ({ open, setOpen, t }) => {
             ) : value === "zhenshinam" ? (
               <CategoriesMegaMenu data={data} slug="zhenshinam" />
             ) : value === "home" ? (
-              <Tableware />
+              <Tableware t={t} />
             ) : value === "perfume" ? (
-              <Perfume />
+              <Perfume t={t} />
             ) : (
-              <Contacts />
+              <Contacts t={t} />
             )
           ) : (
             <Box
@@ -153,7 +158,7 @@ const NavBar = ({ open, setOpen, t }) => {
             >
               <Accordion>
                 <AccordionSummary expandIcon={<ExpandMore />}>
-                  {t("catalog.men")}
+                  {t("nav.men")}
                 </AccordionSummary>
 
                 <AccordionDetails>
@@ -162,7 +167,7 @@ const NavBar = ({ open, setOpen, t }) => {
               </Accordion>
               <Accordion>
                 <AccordionSummary expandIcon={<ExpandMore />}>
-                  {t("catalog.women")}
+                  {t("nav.women")}
                 </AccordionSummary>
 
                 <AccordionDetails>
@@ -175,7 +180,7 @@ const NavBar = ({ open, setOpen, t }) => {
                 </AccordionSummary>
 
                 <AccordionDetails>
-                  <Perfume />
+                  <Perfume t={t} />
                 </AccordionDetails>
               </Accordion>
               <Accordion>
@@ -184,7 +189,7 @@ const NavBar = ({ open, setOpen, t }) => {
                 </AccordionSummary>
 
                 <AccordionDetails>
-                  <Tableware />
+                  <Tableware t={t} />
                 </AccordionDetails>
               </Accordion>
               <Accordion>
