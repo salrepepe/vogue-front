@@ -50,7 +50,7 @@ const CategoriesMegaMenu = ({ slug, data }) => {
             }}
           >
             <Link
-              to={`/catalog?category=${category.fullPath.replaceAll("/", "")}`}
+              to={`/catalog?category=${category.fullPath}`}
               style={{
                 color: "inherit",
                 textDecoration: "none",
