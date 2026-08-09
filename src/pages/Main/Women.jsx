@@ -12,16 +12,16 @@ import { Autoplay, EffectFade } from "swiper/modules";
 
 import bg from "../../assets/images/women-bg.webp";
 
-import v1 from "../../assets/images/v1.jpg";
-import v2 from "../../assets/images/v2.jpg";
-import v3 from "../../assets/images/v3.jpg";
-import v4 from "../../assets/images/v4.jpg";
-import v5 from "../../assets/images/v5.jpg";
-import v6 from "../../assets/images/v6.jpg";
-import v7 from "../../assets/images/v7.jpg";
-import v8 from "../../assets/images/v8.jpg";
-import v9 from "../../assets/images/v9.jpg";
-import v10 from "../../assets/images/v10.jpg";
+import v1 from "../../assets/images/v1.JPG";
+import v2 from "../../assets/images/v2.JPG";
+import v3 from "../../assets/images/v3.JPG";
+import v4 from "../../assets/images/v4.JPG";
+import v5 from "../../assets/images/v5.JPG";
+import v6 from "../../assets/images/v6.JPG";
+import v7 from "../../assets/images/v7.JPG";
+import v8 from "../../assets/images/v8.JPG";
+import v9 from "../../assets/images/v9.JPG";
+import v10 from "../../assets/images/v10.JPG";
 
 const Women = ({ t }) => {
   const { data } = useGetBrandsQuery();
