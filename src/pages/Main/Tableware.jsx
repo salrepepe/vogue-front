@@ -54,7 +54,7 @@ const Tableware = ({ t }) => {
             textAlign: "center",
           }}
         >
-          {t("nav.tableware")}
+          {t("nav.fhome")}
         </Typography>
         <Grid container spacing={2}>
           {categories.map((item, index) => (

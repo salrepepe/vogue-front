@@ -10,8 +10,6 @@ import "swiper/css/effect-fade";
 
 import { Autoplay, EffectFade } from "swiper/modules";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-
 import bg from "../../assets/images/women-bg.webp";
 
 import v1 from "../../assets/images/v.webp";
@@ -25,34 +23,14 @@ import v8 from "../../assets/images/v8.webp";
 import v9 from "../../assets/images/v9.webp";
 import v10 from "../../assets/images/v10.webp";
 
-const MotionBox = motion(Box);
-
 const Women = ({ t }) => {
   const { data } = useGetBrandsQuery();
 
   const images = [v1, v2, v3, v4, v5, v6, v7, v8, v9, v10];
 
-  const sectionRef = useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  // параллакс для слайдера
-  const sliderY = useTransform(scrollYProgress, [0, 1], [-120, 120]);
-
-  // параллакс для нижнего фона
-  const bgY = useTransform(scrollYProgress, [0, 1], [-80, 80]);
-
   return (
-    <Box ref={sectionRef} component="section">
-      <MotionBox
-        style={{ y: sliderY }}
-        sx={{
-          overflow: "hidden",
-        }}
-      >
+    <Box component="section">
+      <Box>
         <Swiper
           effect="fade"
           modules={[Autoplay, EffectFade]}
@@ -76,7 +54,7 @@ const Women = ({ t }) => {
             </SwiperSlide>
           ))}
         </Swiper>
-      </MotionBox>
+      </Box>
 
       <Box
         sx={{
@@ -85,8 +63,7 @@ const Women = ({ t }) => {
           py: "71px",
         }}
       >
-        <MotionBox
-          style={{ y: bgY }}
+        <Box
           sx={{
             position: "absolute",
             inset: "-80px 0",
