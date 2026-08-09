@@ -53,6 +53,7 @@ const Images = ({ product, images, isLoading }) => {
                   width: 100,
                   height: 100,
                   objectFit: "cover",
+                  objectPosition: "top",
                   cursor: "pointer",
                   borderRadius: 1,
                   border:

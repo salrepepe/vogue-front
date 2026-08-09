@@ -34,6 +34,12 @@ const Details = ({ t }) => {
       <Typography fontSize={{ xs: 14, md: 13 }}>{t("nav.catalog")}</Typography>
     </Link>,
 
+    <Link key="2" to={`/catalog?page=1&category=${product?.category?.fullPath}`}>
+      <Typography fontSize={{ xs: 14, md: 13 }}>
+        {product?.category?.name}
+      </Typography>
+    </Link>,
+
     <Typography key="3">
       {isLoading ? <Skeleton variant="text" width={50} /> : product?.name}
     </Typography>,

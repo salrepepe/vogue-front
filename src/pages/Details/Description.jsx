@@ -108,19 +108,25 @@ const Description = ({ t, product, isLoading, setImages }) => {
         {product?.brand?.name}
       </Typography>
 
-      <Typography variant="h4" sx={{ mb: 1 }}>
-        {t("product.currentSize")}
-      </Typography>
+      {sizes.length ? (
+        <>
+          <Typography variant="h4" sx={{ mb: 1 }}>
+            {t("product.currentSize")}
+          </Typography>
 
-      <FormControl fullWidth>
-        <Select onChange={handleChangeSize}>
-          {sizes.map((size) => (
-            <MenuItem key={size.id} value={size.id}>
-              {size.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+          <FormControl fullWidth>
+            <Select onChange={handleChangeSize}>
+              {sizes.map((size) => (
+                <MenuItem key={size.id} value={size.id}>
+                  {size.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </>
+      ) : (
+        ""
+      )}
 
       {colors.length ? (
         <Typography
@@ -181,7 +187,7 @@ const Description = ({ t, product, isLoading, setImages }) => {
         disabled={added}
         onClick={handleAdd}
       >
-        {added ? t('cart.added') : t("product.add_to_cart")}
+        {added ? t("cart.added") : t("product.add_to_cart")}
       </Button>
 
       <Button

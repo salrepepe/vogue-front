@@ -57,6 +57,7 @@ const Card = ({ item, t }) => {
               width: "100%",
               height: "100%",
               objectFit: "cover",
+              objectPosition: "center",
               userSelect: "none",
             }}
           />
@@ -121,6 +122,11 @@ const Card = ({ item, t }) => {
             sx={{
               mt: { xs: 2, md: 3 },
               textAlign: "center",
+              whiteSpace: "nowrap",
+              textOverflow: "ellipsis",
+              overflow: "hidden",
+              // width: "fit-content",
+              maxWidth: "100%",
             }}
           >
             {item.name}
