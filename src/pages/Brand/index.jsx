@@ -8,7 +8,6 @@ import {
   Grid,
   useMediaQuery,
 } from "@mui/material";
-import boss from "../../assets/images/boss.png";
 import Products from "../Catalog/Products";
 import SideBar from "../Catalog/SideBar";
 import Brands from "../Catalog/Brands";
@@ -51,9 +50,10 @@ const Brand = ({ t }) => {
     <>
       <Box
         sx={{
-          background: `url(${data?.banner}) left/cover no-repeat;`,
+          background: `url(${data?.banner}) center/cover no-repeat;`,
           padding: "31px 0",
-          height: "100vh",
+          mt: "100px",
+          height: { xs: "288px", md: "100vh" },
         }}
       >
         <Container>

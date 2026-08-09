@@ -83,7 +83,12 @@ const Checkout = ({ t }) => {
 
   if (successOrder) {
     return (
-      <Box component="section">
+      <Box
+        component="section"
+        sx={{
+          pt: "140px",
+        }}
+      >
         <Container>
           <Box
             sx={{
@@ -157,10 +162,10 @@ const Checkout = ({ t }) => {
   return (
     <>
       {isDirectCreating ||
-        isCreating && (
+        (isCreating && (
           <LinearProgress aria-label="Loading…" variant="query" />
-        )}
-      <Box component="section">
+        ))}
+      <Box component="section" sx={{ mt: "140px" }}>
         <Box component="form" onSubmit={handleSubmit(onSubmit)}>
           <Container>
             <Typography

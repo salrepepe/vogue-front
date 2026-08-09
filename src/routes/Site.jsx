@@ -36,7 +36,7 @@ const Site = ({ t }) => {
         setOpen={setOpenCart}
         open={openCart}
       />
-      <Box component="main">
+      <Box component="main" >
         <Routes>
           {/* HOME */}
           <Route path="/" element={<Main t={t} />} />

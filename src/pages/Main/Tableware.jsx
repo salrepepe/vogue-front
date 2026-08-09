@@ -35,7 +35,7 @@ const Tableware = ({ t }) => {
     },
   ];
   return (
-    <section>
+    <Box component="section" sx={{ "& a": { display: "block" } }}>
       <Box
         component="img"
         sx={{
@@ -74,10 +74,10 @@ const Tableware = ({ t }) => {
             </Grid>
           ))}
         </Grid>
-        {/* <Link to={`/catalog?category`}>
+        <Link to={`/catalog?category`}>
           <Button
             sx={{
-              m: { xs: "25px auto", md: "62px auto 70px" },
+              m: { xs: "25px auto", md: "100px auto 70px" },
               display: "block",
             }}
             variant="outlined"
@@ -85,9 +85,9 @@ const Tableware = ({ t }) => {
           >
             {t("nav.see_more")}
           </Button>
-        </Link> */}
+        </Link>
       </Container>
-    </section>
+    </Box>
   );
 };
 

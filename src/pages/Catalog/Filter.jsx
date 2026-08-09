@@ -84,6 +84,7 @@ const Filter = ({ t, brand }) => {
           <Box
             key={cat.id}
             sx={{
+              fontSize: 14,
               ml: level * 2,
               py: 0.5,
               cursor: "pointer",
@@ -107,6 +108,7 @@ const Filter = ({ t, brand }) => {
           disableGutters
           elevation={0}
           sx={{
+            "& *": { fontSize: "14px!important", p: "0!important" },
             ml: level * 2,
             boxShadow: "none",
             "&::before": {

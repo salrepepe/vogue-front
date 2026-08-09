@@ -27,48 +27,30 @@ const Details = ({ t }) => {
 
   const breadcrumbs = [
     <Link key="1" to="/">
-      <Typography fontSize={{ xs: 14, md: 13 }}>
-        Главная
-      </Typography>
+      <Typography fontSize={{ xs: 14, md: 13 }}>Главная</Typography>
     </Link>,
 
     <Link key="2" to="/catalog">
-      <Typography fontSize={{ xs: 14, md: 13 }}>
-        Каталог
-      </Typography>
+      <Typography fontSize={{ xs: 14, md: 13 }}>Каталог</Typography>
     </Link>,
 
     <Typography key="3">
-      {isLoading ? (
-        <Skeleton variant="text" width={50} />
-      ) : (
-        product?.name
-      )}
+      {isLoading ? <Skeleton variant="text" width={50} /> : product?.name}
     </Typography>,
   ];
 
   return (
-    <Container sx={{ mt: "48px" }}>
-
-      <Breadcrumbs>
-        {breadcrumbs}
-      </Breadcrumbs>
-
+    <Container sx={{ mt: "148px" }}>
+      <Breadcrumbs>{breadcrumbs}</Breadcrumbs>
 
       <Grid
         container
-        sx={{ mt: 4 }}
+        sx={{ mt: 4, flexDirection: { xs: "column-reverse", md: "none" } }}
         spacing={4}
       >
-
         <Grid size={{ xs: 12, sm: 4, md: 8 }}>
-          <Images
-            isLoading={isLoading}
-            product={product}
-            images={images}
-          />
+          <Images isLoading={isLoading} product={product} images={images} />
         </Grid>
-
 
         <Grid size={{ xs: 12, sm: 4, md: 4 }}>
           <Description
@@ -78,9 +60,7 @@ const Details = ({ t }) => {
             t={t}
           />
         </Grid>
-
       </Grid>
-
     </Container>
   );
 };

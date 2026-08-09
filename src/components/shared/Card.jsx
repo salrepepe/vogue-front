@@ -56,7 +56,7 @@ const Card = ({ item }) => {
             sx={{
               width: "100%",
               height: "100%",
-              objectFit: "contain",
+              objectFit: "cover",
               userSelect: "none",
             }}
           />
@@ -105,9 +105,7 @@ const Card = ({ item }) => {
                     cursor: "pointer",
                     transition: "all .2s ease",
                     backgroundColor:
-                      activeImage === index
-                        ? "#fff"
-                        : "rgba(255,255,255,.45)",
+                      activeImage === index ? "#fff" : "rgba(255,255,255,.45)",
                   }}
                 />
               ))}
@@ -154,8 +152,8 @@ const Card = ({ item }) => {
           disabled={added}
           onClick={handleAdd}
           sx={{
-            p: 1,
-            fontSize: 17,
+            p: { xs: "7px 28px", md: 1 },
+            fontSize: { xs: 12, md: 17 },
             borderRadius: 0,
           }}
         >

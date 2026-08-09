@@ -1,72 +1,157 @@
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
-
+import { Box, Container, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import img1 from "../../assets/images/bg.png";
+import { useRef } from "react";
+
 import { useGetBrandsQuery } from "../../app/api/api";
-import man1 from "../../assets/images/br.png";
-import man2 from "../../assets/images/kiton.png";
-import man3 from "../../assets/images/gucci.png";
-import man4 from "../../assets/images/dg.png";
-import man5 from "../../assets/images/dior.png";
-import man6 from "../../assets/images/sr.png";
-import man7 from "../../assets/images/lp.png";
-import man8 from "../../assets/images/ys.png";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/effect-fade";
+
+import { Autoplay, EffectFade } from "swiper/modules";
+
+import { motion, useScroll, useTransform } from "framer-motion";
+
 import bg from "../../assets/images/women-bg.png";
 
-const Women = ({ t }) => {
-  const brands = [man1, man2, man3, man4, man5, man6, man7, man8];
+import v1 from "../../assets/images/v.png";
+import v2 from "../../assets/images/v2.png";
+import v3 from "../../assets/images/v3.png";
+import v4 from "../../assets/images/v4.png";
+import v5 from "../../assets/images/v5.png";
+import v6 from "../../assets/images/v6.png";
+import v7 from "../../assets/images/v7.png";
+import v8 from "../../assets/images/v8.png";
+import v9 from "../../assets/images/v9.png";
+import v10 from "../../assets/images/v10.png";
 
-  const { data, isLoading } = useGetBrandsQuery();
+const MotionBox = motion(Box);
+
+const Women = ({ t }) => {
+  const { data } = useGetBrandsQuery();
+
+  const images = [v1, v2, v3, v4, v5, v6, v7, v8, v9, v10];
+
+  const sectionRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  // параллакс для слайдера
+  const sliderY = useTransform(scrollYProgress, [0, 1], [-120, 120]);
+
+  // параллакс для нижнего фона
+  const bgY = useTransform(scrollYProgress, [0, 1], [-80, 80]);
 
   return (
-    <Box
-      component="section"
-      sx={
-        {
-          // p: { xs: "30px 0 0", md: "0 0 0" },
-        }
-      }
-    >
-      <Box
-        component="img"
-        src={img1}
+    <Box ref={sectionRef} component="section">
+      <MotionBox
+        style={{ y: sliderY }}
         sx={{
-          height: "100vh",
-          width: "100%",
-          objectFit: "cover",
-        }}
-        alt=""
-      />
-      <Box
-        sx={{
-          background: `url(${bg}) center/cover no-repeat;`,
-          padding: "71px 0 ",
+          overflow: "hidden",
         }}
       >
+        <Swiper
+          effect="fade"
+          modules={[Autoplay, EffectFade]}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          slidesPerView={1}
+        >
+          {images.map((image, index) => (
+            <SwiperSlide key={index}>
+              <img
+                src={image}
+                alt=""
+                style={{
+                  width: "100%",
+                  height: "100vh",
+                  objectFit: "cover",
+                }}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </MotionBox>
+
+      <Box
+        sx={{
+          position: "relative",
+          overflow: "hidden",
+          py: "71px",
+        }}
+      >
+        <MotionBox
+          style={{ y: bgY }}
+          sx={{
+            position: "absolute",
+            inset: "-80px 0",
+            backgroundImage: `url(${bg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            zIndex: -1,
+          }}
+        />
+
         <Container>
           <Box
             sx={{
               width: "fit-content",
-              margin: "0 auto",
+              mx: "auto",
               background: "#FFF",
               borderRadius: "30px",
-              padding: "39px 50px 81px",
+              p: {
+                xs: "30px 77px",
+                md: "39px 50px 81px",
+              },
             }}
           >
-            <Typography variant="h3" sx={{ mb: "73px", textAlign: "center" }}>
+            <Typography
+              sx={{
+                mb: {
+                  xs: 4,
+                  md: "73px",
+                },
+                textAlign: "center",
+                fontSize: {
+                  xs: 18,
+                  md: 24,
+                },
+              }}
+            >
               {t("nav.women")}
             </Typography>
+
             <Box
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                rowGap: "50px",
-                alignItems: "start",
+                rowGap: "30px",
+                alignItems: "center",
+
+                "& img": {
+                  width: {
+                    xs: 123,
+                    md: 305,
+                  },
+                  transition: ".35s ease",
+                },
+
+                "& a:hover img": {
+                  transform: "scale(1.05)",
+                },
               }}
             >
-              {data?.map((item, idx) => (
-                <Link to={`/catalog/brand/${item.slug}/${item.id}`} key={idx}>
-                  <img src={item.logo} alt="" />
+              {data?.map((item) => (
+                <Link
+                  key={item.id}
+                  to={`/catalog/brand/${item.slug}/${item.id}`}
+                >
+                  <img src={item.logo} alt={item.name} />
                 </Link>
               ))}
             </Box>

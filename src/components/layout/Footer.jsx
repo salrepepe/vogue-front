@@ -8,7 +8,7 @@ const Footer = ({ t }) => {
       sx={{
         mt: 6,
         background: "#F3F3F3",
-        padding: "70px 0 133px",
+        padding: { xs: "30px 0", md: "70px 0 133px" },
       }}
     >
       <Container>
@@ -19,6 +19,8 @@ const Footer = ({ t }) => {
           sx={{
             display: "flex",
             justifyContent: "space-between",
+            flexDirection: { xs: "column", md: "row" },
+            rowGap: "30px",
             "& .div": {
               display: "flex",
               alignItems: "center",

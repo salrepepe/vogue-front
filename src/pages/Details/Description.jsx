@@ -108,7 +108,9 @@ const Description = ({ t, product, isLoading, setImages }) => {
         {product?.brand?.name}
       </Typography>
 
-      <Typography variant="h4">{t("product.currentSize")}</Typography>
+      <Typography variant="h4" sx={{ mb: 1 }}>
+        {t("product.currentSize")}
+      </Typography>
 
       <FormControl fullWidth>
         <Select onChange={handleChangeSize}>
@@ -120,14 +122,18 @@ const Description = ({ t, product, isLoading, setImages }) => {
         </Select>
       </FormControl>
 
-      <Typography
-        variant="h4"
-        sx={{
-          mt: 3,
-        }}
-      >
-        {t("product.currentColor")}
-      </Typography>
+      {colors.length ? (
+        <Typography
+          variant="h4"
+          sx={{
+            mt: 3,
+          }}
+        >
+          {t("product.currentColor")}
+        </Typography>
+      ) : (
+        ""
+      )}
 
       <Box
         sx={{
@@ -192,7 +198,6 @@ const Description = ({ t, product, isLoading, setImages }) => {
         target="_blank"
         variant="outlined"
         sx={{ m: "16px 0 0" }}
-        size="large"
         color="primary"
         fullWidth
       >

@@ -157,7 +157,7 @@ const NavBar = ({ open, setOpen, t }) => {
                 </AccordionSummary>
 
                 <AccordionDetails>
-                  <Men />
+                  <CategoriesMegaMenu data={data} slug="muzhskoe" />
                 </AccordionDetails>
               </Accordion>
               <Accordion>
@@ -166,7 +166,7 @@ const NavBar = ({ open, setOpen, t }) => {
                 </AccordionSummary>
 
                 <AccordionDetails>
-                  <Women />
+                  <CategoriesMegaMenu data={data} slug="zhenshinam" />
                 </AccordionDetails>
               </Accordion>
               <Accordion>
@@ -193,7 +193,7 @@ const NavBar = ({ open, setOpen, t }) => {
                 </AccordionSummary>
 
                 <AccordionDetails>
-                  <Women />
+                  <Contacts />
                 </AccordionDetails>
               </Accordion>
             </Box>

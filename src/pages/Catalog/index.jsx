@@ -23,7 +23,7 @@ const Catalog = ({ t }) => {
   return (
     <>
       <SideBar open={open} setOpen={setOpen} t={t} />
-      <Container sx={{ mt: 4 }} maxWidth="xl">
+      <Container sx={{ mt: '140px' }}  maxWidth="xl">
         {md && <Brands t={t} />}{" "}
         <Grid container spacing={2}>
           {md && (

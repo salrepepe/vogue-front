@@ -1,20 +1,10 @@
 import React from "react";
-import man1 from "../../assets/images/br.png";
-import man2 from "../../assets/images/kiton.png";
-import man3 from "../../assets/images/gucci.png";
-import man4 from "../../assets/images/dg.png";
-import man5 from "../../assets/images/dior.png";
-import man6 from "../../assets/images/sr.png";
-import man7 from "../../assets/images/lp.png";
-import man8 from "../../assets/images/ys.png";
 import bg from "../../assets/images/man1.png";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useGetBrandsQuery } from "../../app/api/api";
 
 const Man = ({ t }) => {
-  const brands = [man1, man2, man3, man4, man5, man6, man7, man8];
-
   const { data, isLoading } = useGetBrandsQuery();
 
   return (
@@ -32,10 +22,16 @@ const Man = ({ t }) => {
             margin: "0 auto",
             background: "#FFF",
             borderRadius: "30px",
-            padding: "39px 50px 81px",
+            padding: { xs: "30px 77px", md: "39px 50px 81px" },
           }}
         >
-          <Typography variant="h3" sx={{ mb: "73px", textAlign: "center" }}>
+          <Typography
+            sx={{
+              mb: { xs: 4, md: "73px" },
+              textAlign: "center",
+              fontSize: { xs: 18, md: 24 },
+            }}
+          >
             {" "}
             {t("nav.men")}
           </Typography>
@@ -43,8 +39,11 @@ const Man = ({ t }) => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              rowGap: "50px",
-              alignItems: "start",
+              rowGap: "30px",
+              alignItems: "center",
+              "& img": {
+                width: { xs: 123, md: 305 },
+              },
             }}
           >
             {data?.map((item, idx) => (

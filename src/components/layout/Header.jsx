@@ -1,6 +1,5 @@
 import logo from "../../assets/images/logo.png";
-import logoBlack from "../../assets/images/logoBlack.svg";
-
+import logoBlack from "../../assets/images/logo.png";
 import {
   Badge,
   Box,
@@ -25,12 +24,13 @@ const Header = ({ t, setTransition, setOpen, setOpenCart }) => {
     <Box
       component="header"
       sx={{
-        zIndex: 1,
-        position: location.pathname === "/" && "fixed",
+        zIndex: 2,
+        position: "fixed",
         width: "100%",
         background:
-          location.pathname === "/" &&
-          "linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%)",
+          location.pathname === "/"
+            ? "linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%)"
+            : "#FFF",
         height: location.pathname === "/" ? "140px" : "auto",
         p: "28px 0",
         color: location.pathname === "/" ? "#FFF" : "#000",

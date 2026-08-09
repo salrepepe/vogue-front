@@ -7,6 +7,8 @@ const Contacts = () => {
         sx={{
           display: "flex",
           justifyContent: "space-between",
+          flexDirection: { xs: "column", md: "row" },
+          rowGap: "30px",
           "& .div": {
             display: "flex",
             alignItems: "center",
