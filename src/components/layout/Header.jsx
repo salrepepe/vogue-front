@@ -95,7 +95,7 @@ const Header = ({ t, setTransition, setOpen, setOpenCart }) => {
           </Link>
         )}
         <Box sx={{ display: "flex", columnGap: 2, alignItems: "center" }}>
-          {md && <LanguageSwitcher setTransition={setTransition} />}
+          <LanguageSwitcher setTransition={setTransition} />
           {/* <IconButton>
             <Favorites color={location.pathname === "/" ? "#FFF" : "#000"} />
           </IconButton> */}

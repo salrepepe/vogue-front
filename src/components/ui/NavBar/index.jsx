@@ -20,6 +20,7 @@ import { Link, useLocation } from "react-router-dom";
 import CategoriesMegaMenu from "../../shared/CategoriesMegaMenu";
 import { useGetCategoriesQuery } from "../../../app/api/api";
 import Contacts from "./Contacts";
+import LanguageSwitcher from "../../shared/LanguageSwitcher";
 
 const NavBar = ({ open, setOpen, t }) => {
   const location = useLocation();

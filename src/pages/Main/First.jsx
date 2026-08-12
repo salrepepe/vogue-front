@@ -20,19 +20,20 @@ const First = () => {
         height: { xs: "288px", md: "100vh" },
         width: "100vw",
         overflow: "hidden",
-        "&:before": {
-          content: `''`,
-          position: "absolute",
-          width: { xs: "0", md: "100%" },
-          height: "70vh",
-          background:
-            "linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%);",
-          zIndex:  1,
-          top: 0,
-        },
+        background: "#000",
+        // "&:before": {
+        //   content: `''`,
+        //   position: "absolute",
+        //   width: { xs: "0", md: "100%" },
+        //   height: "70vh",
+        //   background:
+        //     "linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%);",
+        //   zIndex:  1,
+        //   top: 0,
+        // },
       }}
     >
-      <MotionBox
+      {/* <MotionBox
         component="img"
         src={img1}
         style={{
@@ -45,7 +46,7 @@ const First = () => {
           objectFit: "cover",
         }}
         alt=""
-      />
+      /> */}
 
       <Box
         sx={{
@@ -55,7 +56,7 @@ const First = () => {
           alignItems: "center",
           justifyContent: "center",
           pointerEvents: "none",
-          zIndex:2
+          zIndex: 2,
         }}
       >
         <motion.img

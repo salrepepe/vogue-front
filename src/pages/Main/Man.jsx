@@ -11,7 +11,7 @@ const Man = ({ t }) => {
     <Box
       component="section"
       sx={{
-        background: `url(${bg}) center/cover no-repeat;`,
+        // background: `url(${bg}) center/cover no-repeat;`,
         padding: "71px 0",
       }}
     >

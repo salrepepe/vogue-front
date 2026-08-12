@@ -29,7 +29,7 @@ const Women = ({ t }) => {
   const images = [v1, v2, v3, v4, v5, v6, v7, v8, v9, v10];
 
   return (
-    <Box component="section">
+    <Box component="section" sx={{ background: "#000" }}>
       <Box>
         <Swiper
           effect="fade"

@@ -29,7 +29,7 @@ const Site = ({ t }) => {
         setTransition={setTransition}
       />
       <ScreenTransition transition={transition} />
-      <NavBar t={t} open={open} setOpen={setOpen} />
+      <NavBar t={t} setTransition={setTransition} open={open} setOpen={setOpen} />
       <Cart
         setOpenCheckout={setOpenCheckout}
         t={t}
