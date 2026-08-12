@@ -38,7 +38,7 @@ const NavBar = ({ open, setOpen, t }) => {
     { name: t("nav.men"), slug: "muzhskoe" },
     { name: t("nav.women"), slug: "zhenshinam" },
     { name: t("nav.fhome"), slug: "home" },
-    { name: t("nav.perfume"), slug: "perfume" },
+    // { name: t("nav.perfume"), slug: "perfume" },
     { name: t("nav.contacts"), slug: "contacts" },
   ];
 
@@ -130,8 +130,6 @@ const NavBar = ({ open, setOpen, t }) => {
               <CategoriesMegaMenu data={data} slug="zhenshinam" />
             ) : value === "home" ? (
               <Tableware t={t} />
-            ) : value === "perfume" ? (
-              <Perfume t={t} />
             ) : (
               <Contacts t={t} />
             )
@@ -175,7 +173,7 @@ const NavBar = ({ open, setOpen, t }) => {
                   <CategoriesMegaMenu data={data} slug="zhenshinam" />
                 </AccordionDetails>
               </Accordion>
-              <Accordion>
+              {/* <Accordion>
                 <AccordionSummary expandIcon={<ExpandMore />}>
                   {t("nav.perfume")}
                 </AccordionSummary>
@@ -183,7 +181,7 @@ const NavBar = ({ open, setOpen, t }) => {
                 <AccordionDetails>
                   <Perfume t={t} />
                 </AccordionDetails>
-              </Accordion>
+              </Accordion> */}
               <Accordion>
                 <AccordionSummary expandIcon={<ExpandMore />}>
                   {t("nav.tableware")}

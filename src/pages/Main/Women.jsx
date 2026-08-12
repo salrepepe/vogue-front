@@ -29,7 +29,14 @@ const Women = ({ t }) => {
   const images = [v1, v2, v3, v4, v5, v6, v7, v8, v9, v10];
 
   return (
-    <Box component="section" sx={{ background: "#000" }}>
+    <Box
+      component="section"
+      sx={{
+        "& .swiper": {
+          background: "#000",
+        },
+      }}
+    >
       <Box>
         <Swiper
           effect="fade"
@@ -67,7 +74,7 @@ const Women = ({ t }) => {
           sx={{
             position: "absolute",
             inset: "-80px 0",
-            backgroundImage: `url(${bg})`,
+            // backgroundImage: `url(${bg})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             zIndex: -1,
