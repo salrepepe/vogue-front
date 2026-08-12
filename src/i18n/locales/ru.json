@@ -40,7 +40,12 @@
     "men": "Мужской",
     "kids": "Детям",
     "brand": "Бренд",
-    "catalog": "Каталог"
+    "catalog": "Каталог",
+
+    "clothing": "Одежда",
+    "shoes": "Обувь",
+    "accessories": "Аксессуары",
+    "bags": "Сумки"
   },
   "product": {
     "add_to_cart": "В корзину",

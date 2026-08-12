@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Typography, Grid, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
 
@@ -9,6 +9,11 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 
 import { Autoplay, EffectFade } from "swiper/modules";
+
+import women1 from "../../assets/images/women-1.png";
+import women2 from "../../assets/images/women-2.png";
+import women3 from "../../assets/images/women-3.png";
+import women4 from "../../assets/images/women-4.png";
 
 import bg from "../../assets/images/women-bg.webp";
 
@@ -25,6 +30,33 @@ import v10 from "../../assets/images/v10.JPG";
 
 const Women = ({ t }) => {
   const { data } = useGetBrandsQuery();
+
+  const catalogCategories = [
+    {
+      id: 1,
+      name: t("nav.clothing"),
+      slug: "/catalog?page=1&category=zhenshinam%2Fodezhda",
+      image: women1,
+    },
+    {
+      id: 2,
+      name: t("nav.shoes"),
+      slug: "/catalog?page=1&category=zhenshinam%2Fobuv",
+      image: women3,
+    },
+    {
+      id: 3,
+      name: t("nav.bags"),
+      slug: "/catalog?page=1&category=zhenshinam%2Faksessuary%2Fsumki",
+      image: women2,
+    },
+    {
+      id: 4,
+      name: t("nav.accessories"),
+      slug: "/catalog?page=1&category=zhenshinam%2Faksessuary",
+      image: women4,
+    },
+  ];
 
   const images = [v1, v2, v3, v4, v5, v6, v7, v8, v9, v10];
 
@@ -63,7 +95,76 @@ const Women = ({ t }) => {
         </Swiper>
       </Box>
 
-      <Box
+      <Typography
+        sx={{
+          mt: 5,
+
+          textAlign: "center",
+          mb: { xs: "30px", md: "62px" },
+        }}
+        variant="h2"
+      >
+        {t("nav.women")}
+      </Typography>
+      <Grid container spacing={2}>
+        {catalogCategories.map((item, index) => (
+          <Grid size={{ xs: 6, sm: 6, md: 3 }} key={index}>
+            <Link to={item.slug}>
+              <Box sx={{}}>
+                <Box
+                  component="img"
+                  src={item.image}
+                  sx={{
+                    objectFit: "cover",
+                    width: "100%",
+                    borderRadius: "10px",
+                    height: { xs: "154px", md: "100%" },
+                  }}
+                  alt=""
+                />
+                <Typography sx={{ mt: "20px", textAlign: "center" }}>
+                  {item.name}
+                </Typography>
+              </Box>
+            </Link>
+          </Grid>
+        ))}
+      </Grid>
+      <Link to="/catalog?category=women">
+        <Button
+          sx={{
+            m: { xs: "30px auto", md: "62px auto 70px" },
+            display: "block",
+          }}
+          variant="outlined"
+          size="medium"
+        >
+          {t("nav.see_more")}
+        </Button>
+      </Link>
+      <Box className="brands">
+        <Box className="brands-track">
+          {data?.map((item, index) => (
+            <Link
+              className="brand"
+              to={`/catalog/brand/${item.slug}/${item.id}?page=1&category=zhenshinam`}
+              key={index}
+            >
+              <Box
+                component="img"
+                src={item.logo}
+                sx={{
+                  objectFit: "contain",
+                  width: { xs: "78px", md: "145px" },
+                  height: { xs: "46px", md: "85px" },
+                }}
+                alt=""
+              />
+            </Link>
+          ))}
+        </Box>
+      </Box>
+      {/* <Box
         sx={{
           position: "relative",
           overflow: "hidden",
@@ -141,7 +242,7 @@ const Women = ({ t }) => {
             </Box>
           </Box>
         </Container>
-      </Box>
+      </Box> */}
     </Box>
   );
 };

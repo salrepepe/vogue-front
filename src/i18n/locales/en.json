@@ -23,7 +23,10 @@
     "dishes": "Dishes",
     "vases": "Vases",
     "towels": "Towels",
-    "fhome": "Home"
+    "fhome": "Home",
+    "clothing": "Clothing",
+    "shoes": "Shoes",
+    "bags": "Bags"
   },
   "catalog": {
     "sort": "Sort",

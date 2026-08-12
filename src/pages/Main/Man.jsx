@@ -1,11 +1,42 @@
 import React from "react";
-import bg from "../../assets/images/man1.webp";
+// import bg from "../../assets/images/man1.webp";
+import man1 from "../../assets/images/man-1.png";
+import man2 from "../../assets/images/man-2.png";
+import man3 from "../../assets/images/man-3.png";
+import man4 from "../../assets/images/man-4.png";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useGetBrandsQuery } from "../../app/api/api";
 
 const Man = ({ t }) => {
   const { data, isLoading } = useGetBrandsQuery();
+
+  const catalogCategories = [
+    {
+      id: 1,
+      name: t("nav.clothing"),
+      slug: "/catalog?category=muzhskoe%2Fodezhda&page=1",
+      image: man1,
+    },
+    {
+      id: 2,
+      name: t("nav.shoes"),
+      slug: "/catalog?category=muzhskoe%2Fobuv&page=1",
+      image: man3,
+    },
+    {
+      id: 3,
+      name: t("nav.accessories"),
+      slug: "/catalog?category=muzhskoe%2Faksessuary&page=1",
+      image: man4,
+    },
+    {
+      id: 4,
+      name: t("nav.bags"),
+      slug: "/catalog?category=muzhskoe%2Faksessuary%2Fsumki&page=1",
+      image: man2,
+    },
+  ];
 
   return (
     <Box
@@ -16,7 +47,7 @@ const Man = ({ t }) => {
       }}
     >
       <Container>
-        <Box
+        {/* <Box
           sx={{
             width: "fit-content",
             margin: "0 auto",
@@ -52,8 +83,8 @@ const Man = ({ t }) => {
               </Link>
             ))}
           </Box>
-        </Box>
-        {/* <Typography
+        </Box> */}
+        <Typography
           variant="h2"
           sx={{
             m: { xs: "20px 0 30px", md: "40px 0 62px" },
@@ -64,7 +95,7 @@ const Man = ({ t }) => {
         </Typography>
         <Grid container spacing={2}>
           {catalogCategories.map((item, index) => (
-            <Grid size={{ xs: 6, sm: 6, md: 3}} key={index}>
+            <Grid size={{ xs: 6, sm: 6, md: 3 }} key={index}>
               <Link to={item.slug}>
                 <Box>
                   <Box
@@ -103,7 +134,7 @@ const Man = ({ t }) => {
             {data?.map((item, index) => (
               <Link
                 className="brand"
-                to={`/catalog?brand=${item.slug}`}
+                to={`/catalog/brand/${item.slug}/${item.id}`}
                 key={index}
               >
                 <Box
@@ -119,7 +150,7 @@ const Man = ({ t }) => {
               </Link>
             ))}
           </Box>
-        </Box> */}
+        </Box>
       </Container>
     </Box>
   );
