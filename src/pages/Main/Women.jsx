@@ -71,12 +71,13 @@ const Women = ({ t }) => {
         >
           {images.map((image, index) => (
             <SwiperSlide key={index}>
-              <img
+              <Box
+                component="img"
                 src={image}
                 alt=""
-                style={{
+                sx={{
                   width: "100%",
-                  height: "100vh",
+                  height: { xs: "63vh", md: "100vh" },
                   objectFit: "contain",
                 }}
               />

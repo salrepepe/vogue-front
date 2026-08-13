@@ -43,7 +43,7 @@ const Man = ({ t }) => {
       component="section"
       sx={{
         // background: `url(${bg}) center/cover no-repeat;`,
-        padding: "71px 0",
+        padding: "71px 0 20px",
       }}
     >
       <Container>
