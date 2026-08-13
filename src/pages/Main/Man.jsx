@@ -103,7 +103,9 @@ const Man = ({ t }) => {
             >
               {outerwearProducts.slice(0, 4).map((item) => (
                 <SwiperSlide>
-                  <Link to={`/catalog/${item.slug}/${item.id}`}>
+                  <Link
+                    to={`/catalog/brand/${item.brand.slug}/${item.brand.id}?page=1&category=muzhskoe%2Fodezhda%2Fverhnyaya-odezhda`}
+                  >
                     <Box
                       component="img"
                       src={item?.images[0]}
@@ -132,7 +134,7 @@ const Man = ({ t }) => {
                 <SwiperSlide>
                   <Link
                     style={{ display: "block" }}
-                    to={`/catalog/${item.slug}/${item.id}`}
+                    to={`/catalog/brand/${item.brand.slug}/${item.brand.id}?page=1&category=muzhskoe/obuv`}
                   >
                     <Box
                       component="img"
@@ -160,7 +162,9 @@ const Man = ({ t }) => {
             >
               {pantsProducts.slice(0, 4).map((item) => (
                 <SwiperSlide>
-                  <Link to={`/catalog/${item.slug}/${item.id}`}>
+                  <Link
+                    to={`/catalog/brand/${item.brand.slug}/${item.brand.id}?page=1&category=muzhskoe/odezhda/bryuki`}
+                  >
                     <Box
                       component="img"
                       src={item?.images[0]}
@@ -187,7 +191,9 @@ const Man = ({ t }) => {
             >
               {sweaterProducts.slice(0, 4).map((item) => (
                 <SwiperSlide>
-                  <Link to={`/catalog/${item.slug}/${item.id}`}>
+                  <Link
+                    to={`/catalog/brand/${item.brand.slug}/${item.brand.id}?page=1&category=muzhskoe/odezhda/svitery`}
+                  >
                     <Box
                       component="img"
                       src={item?.images[0]}
