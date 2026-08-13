@@ -2,20 +2,15 @@ import { Box, Container, Typography, Grid, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
 
-import { useGetBrandsQuery } from "../../app/api/api";
+import { useGetBrandsQuery, useGetProductsQuery } from "../../app/api/api";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-fade";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
-import { Autoplay, EffectFade } from "swiper/modules";
-
-import women1 from "../../assets/images/women-1.png";
-import women2 from "../../assets/images/women-2.png";
-import women3 from "../../assets/images/women-3.png";
-import women4 from "../../assets/images/women-4.png";
-
-import bg from "../../assets/images/women-bg.webp";
+import { Autoplay, EffectFade, Pagination, Navigation } from "swiper/modules";
 
 import v1 from "../../assets/images/v1.JPG";
 import v2 from "../../assets/images/v2.JPG";
@@ -31,32 +26,26 @@ import v10 from "../../assets/images/v10.JPG";
 const Women = ({ t }) => {
   const { data } = useGetBrandsQuery();
 
-  const catalogCategories = [
-    {
-      id: 1,
-      name: t("nav.clothing"),
-      slug: "/catalog?page=1&category=zhenshinam%2Fodezhda",
-      image: women1,
-    },
-    {
-      id: 2,
-      name: t("nav.shoes"),
-      slug: "/catalog?page=1&category=zhenshinam%2Fobuv",
-      image: women3,
-    },
-    {
-      id: 3,
-      name: t("nav.bags"),
-      slug: "/catalog?page=1&category=zhenshinam%2Faksessuary%2Fsumki",
-      image: women2,
-    },
-    {
-      id: 4,
-      name: t("nav.accessories"),
-      slug: "/catalog?page=1&category=zhenshinam%2Faksessuary",
-      image: women4,
-    },
-  ];
+  const { data: outerwear } = useGetProductsQuery({
+    category: "zhenshinam/odezhda/verhnyaya-odezhda",
+  });
+
+  const { data: shoes } = useGetProductsQuery({
+    category: "zhenshinam/obuv",
+  });
+
+  const { data: pants } = useGetProductsQuery({
+    category: "zhenshinam/odezhda/bryuki",
+  });
+
+  const { data: sweaters } = useGetProductsQuery({
+    category: "zhenshinam/odezhda/svitery",
+  });
+
+  const outerwearProducts = outerwear?.data || [];
+  const shoesProducts = shoes?.data || [];
+  const pantsProducts = pants?.data || [];
+  const sweaterProducts = sweaters?.data || [];
 
   const images = [v1, v2, v3, v4, v5, v6, v7, v8, v9, v10];
 
@@ -65,7 +54,8 @@ const Women = ({ t }) => {
       component="section"
       sx={{
         "& .swiper": {
-          background: "#000",
+          height: "fit-content",
+          // background: "#000",
         },
       }}
     >
@@ -106,64 +96,152 @@ const Women = ({ t }) => {
       >
         {t("nav.women")}
       </Typography>
-      <Grid container spacing={2}>
-        {catalogCategories.map((item, index) => (
-          <Grid size={{ xs: 6, sm: 6, md: 3 }} key={index}>
-            <Link to={item.slug}>
-              <Box sx={{}}>
+      <Container>
+        <Grid container spacing={2}>
+          <Grid size={{ xs: 6, sm: 6, md: 3 }}>
+            <Swiper
+              slidesPerView={1}
+              navigation={true}
+              pagination={true}
+              modules={[Pagination, Navigation]}
+            >
+              {outerwearProducts.slice(0, 4).map((item) => (
+                <SwiperSlide>
+                  <Link to={`/catalog/${item.slug}/${item.id}`}>
+                    <Box
+                      component="img"
+                      src={item?.images[0]}
+                      sx={{
+                        border: { xs: "1px solid #777", md: "none" },
+                        width: "100%",
+                        objectFit: "contain",
+                        height: { xs: "300px", md: 400 },
+                        padding: "6px",
+                      }}
+                      alt=""
+                    />
+                  </Link>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </Grid>
+          <Grid size={{ xs: 6, sm: 6, md: 3 }}>
+            <Swiper
+              slidesPerView={1}
+              navigation={true}
+              pagination={true}
+              modules={[Pagination, Navigation]}
+            >
+              {shoesProducts.slice(0, 4).map((item) => (
+                <SwiperSlide>
+                  <Link to={`/catalog/${item.slug}/${item.id}`}>
+                    <Box
+                      component="img"
+                      src={item?.images[0]}
+                      sx={{
+                        border: { xs: "1px solid #777", md: "none" },
+                        width: "100%",
+                        objectFit: "contain",
+                        height: { xs: "300px", md: 400 },
+                        padding: "6px",
+                      }}
+                      alt=""
+                    />
+                  </Link>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </Grid>
+          <Grid size={{ xs: 6, sm: 6, md: 3 }}>
+            <Swiper
+              slidesPerView={1}
+              navigation={true}
+              pagination={true}
+              modules={[Pagination, Navigation]}
+            >
+              {pantsProducts.slice(0, 4).map((item) => (
+                <SwiperSlide>
+                  <Link to={`/catalog/${item.slug}/${item.id}`}>
+                    <Box
+                      component="img"
+                      src={item?.images[0]}
+                      sx={{
+                        border: { xs: "1px solid #777", md: "none" },
+                        width: "100%",
+                        objectFit: "contain",
+                        height: { xs: "300px", md: 400 },
+                        padding: "6px",
+                      }}
+                      alt=""
+                    />
+                  </Link>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </Grid>
+          <Grid size={{ xs: 6, sm: 6, md: 3 }}>
+            <Swiper
+              slidesPerView={1}
+              navigation={true}
+              pagination={true}
+              modules={[Pagination, Navigation]}
+            >
+              {sweaterProducts.slice(0, 4).map((item) => (
+                <SwiperSlide>
+                  <Link to={`/catalog/${item.slug}/${item.id}`}>
+                    <Box
+                      component="img"
+                      src={item?.images[0]}
+                      sx={{
+                        border: { xs: "1px solid #777", md: "none" },
+                        width: "100%",
+                        objectFit: "contain",
+                        height: { xs: "300px", md: 400 },
+                        padding: "6px",
+                      }}
+                      alt=""
+                    />
+                  </Link>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </Grid>
+        </Grid>
+        <Link to="/catalog?category=zhenshinam&page=1">
+          <Button
+            sx={{
+              m: { xs: "30px auto", md: "62px auto 70px" },
+              display: "block",
+            }}
+            variant="outlined"
+            size="medium"
+          >
+            {t("nav.see_more")}
+          </Button>
+        </Link>
+        <Box className="brands">
+          <Box className="brands-track">
+            {data?.map((item, index) => (
+              <Link
+                className="brand"
+                to={`/catalog/brand/${item.slug}/${item.id}?page=1&category=zhenshinam`}
+                key={index}
+              >
                 <Box
                   component="img"
-                  src={item.image}
+                  src={item.logo}
                   sx={{
-                    objectFit: "cover",
-                    width: "100%",
-                    borderRadius: "10px",
-                    height: { xs: "154px", md: "100%" },
+                    objectFit: "contain",
+                    width: { xs: "111px", md: "145px" },
+                    height: { xs: "74px", md: "85px" },
                   }}
                   alt=""
                 />
-                <Typography sx={{ mt: "20px", textAlign: "center" }}>
-                  {item.name}
-                </Typography>
-              </Box>
-            </Link>
-          </Grid>
-        ))}
-      </Grid>
-      <Link to="/catalog?category=women">
-        <Button
-          sx={{
-            m: { xs: "30px auto", md: "62px auto 70px" },
-            display: "block",
-          }}
-          variant="outlined"
-          size="medium"
-        >
-          {t("nav.see_more")}
-        </Button>
-      </Link>
-      <Box className="brands">
-        <Box className="brands-track">
-          {data?.map((item, index) => (
-            <Link
-              className="brand"
-              to={`/catalog/brand/${item.slug}/${item.id}?page=1&category=zhenshinam`}
-              key={index}
-            >
-              <Box
-                component="img"
-                src={item.logo}
-                sx={{
-                  objectFit: "contain",
-                  width: { xs: "78px", md: "145px" },
-                  height: { xs: "46px", md: "85px" },
-                }}
-                alt=""
-              />
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </Box>
         </Box>
-      </Box>
+      </Container>
       {/* <Box
         sx={{
           position: "relative",

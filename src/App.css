@@ -1,6 +1,10 @@
 @import url("./assets/fonts/Kinetika-Medium/style.css");
 @import url("./assets/fonts/Kinetika-Bold/style.css");
 
+:root {
+  --swiper-theme-color: #000 !important;
+}
+
 * {
   padding: 0;
   margin: 0;

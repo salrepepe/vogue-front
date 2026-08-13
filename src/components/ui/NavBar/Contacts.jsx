@@ -84,7 +84,7 @@ const Contacts = () => {
           </svg>
 
           <Typography component="span" variant="h5">
-            +996 998 15 03 91
+            +996 559 43 33 21{" "}
           </Typography>
         </div>
         <div className="div">
@@ -102,7 +102,7 @@ const Contacts = () => {
           </svg>
 
           <Typography component="span" variant="h5">
-            +996 998 15 03 91
+            +996 559 43 33 21{" "}
           </Typography>
         </div>
       </Box>

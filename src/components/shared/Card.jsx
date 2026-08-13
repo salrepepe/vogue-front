@@ -138,7 +138,7 @@ const Card = ({ item, t }) => {
               color: "#777",
             }}
           >
-            {item.category?.name}
+            {item.brand?.name}
           </Typography>
 
           <Typography

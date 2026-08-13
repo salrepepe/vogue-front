@@ -6,21 +6,18 @@ import {
   AccordionSummary,
   Box,
   Container,
+  IconButton,
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import logoBlack from "../../../assets/images/logoblack.svg";
-import Men from "./Men";
-import Women from "./Women";
 import Tableware from "./Tableware";
-import Perfume from "./Perfume";
 import Menu from "../../../assets/icons/menu";
 import ExpandMore from "../../../assets/icons/ExpandMore";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import CategoriesMegaMenu from "../../shared/CategoriesMegaMenu";
 import { useGetCategoriesQuery } from "../../../app/api/api";
 import Contacts from "./Contacts";
-import LanguageSwitcher from "../../shared/LanguageSwitcher";
+import Brands from "./Brands";
 
 const NavBar = ({ open, setOpen, t }) => {
   const location = useLocation();
@@ -28,17 +25,17 @@ const NavBar = ({ open, setOpen, t }) => {
 
   const md = useMediaQuery("(min-width:768px)");
 
-  const [value, setValue] = useState("muzhskoe");
+  const [value, setValue] = useState("brands");
 
   const handleChange = (value) => {
     setValue(value);
   };
 
   const nav = [
+    { name: t("nav.brands"), slug: "brands" },
     { name: t("nav.men"), slug: "muzhskoe" },
     { name: t("nav.women"), slug: "zhenshinam" },
     { name: t("nav.fhome"), slug: "home" },
-    // { name: t("nav.perfume"), slug: "perfume" },
     { name: t("nav.contacts"), slug: "contacts" },
   ];
 
@@ -58,12 +55,32 @@ const NavBar = ({ open, setOpen, t }) => {
         }}
       >
         <Container>
-          <span style={{ cursor: "pointer" }} onClick={() => setOpen(false)}>
-            <Menu color={"#000"} />
-            <Typography sx={{ ml: 1, mr: 3 }} component="span">
-              {t("nav.menu")}
-            </Typography>
-          </span>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <span style={{ cursor: "pointer" }} onClick={() => setOpen(false)}>
+              <Menu color={"#000"} />
+              <Typography sx={{ ml: 1, mr: 3 }} component="span">
+                {t("nav.menu")}
+              </Typography>
+            </span>
+            <IconButton onClick={() => setOpen(false)}>
+              {" "}
+              <svg
+                width="21"
+                height="21"
+                viewBox="0 0 21 21"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M15.2028 4.94975L4.94977 15.2028" stroke="black" />
+                <path d="M15.3831 15.376L5.13007 5.12299" stroke="black" />
+              </svg>
+            </IconButton>
+          </Box>
           {md && (
             <svg
               style={{ display: "table", margin: "0 auto" }}
@@ -130,6 +147,8 @@ const NavBar = ({ open, setOpen, t }) => {
               <CategoriesMegaMenu data={data} slug="zhenshinam" />
             ) : value === "home" ? (
               <Tableware t={t} />
+            ) : value === "brands" ? (
+              <Brands />
             ) : (
               <Contacts t={t} />
             )
@@ -155,6 +174,15 @@ const NavBar = ({ open, setOpen, t }) => {
                 },
               }}
             >
+              <Accordion>
+                <AccordionSummary expandIcon={<ExpandMore />}>
+                  {t("nav.brands")}
+                </AccordionSummary>
+
+                <AccordionDetails>
+                  <Brands />
+                </AccordionDetails>
+              </Accordion>
               <Accordion>
                 <AccordionSummary expandIcon={<ExpandMore />}>
                   {t("nav.men")}
@@ -191,6 +219,7 @@ const NavBar = ({ open, setOpen, t }) => {
                   <Tableware t={t} />
                 </AccordionDetails>
               </Accordion>
+
               <Accordion>
                 <AccordionSummary expandIcon={<ExpandMore />}>
                   {t("nav.contacts")}
