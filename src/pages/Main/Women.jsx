@@ -22,6 +22,7 @@ import v7 from "../../assets/images/v7.JPG";
 import v8 from "../../assets/images/v8.JPG";
 import v9 from "../../assets/images/v9.JPG";
 import v10 from "../../assets/images/v10.JPG";
+import video from "../../assets/images/women.mp4";
 
 const Women = ({ t }) => {
   const { data } = useGetBrandsQuery();
@@ -64,11 +65,26 @@ const Women = ({ t }) => {
           effect="fade"
           modules={[Autoplay, EffectFade]}
           autoplay={{
-            delay: 2500,
+            delay: 5000,
             disableOnInteraction: false,
           }}
           slidesPerView={1}
         >
+          <SwiperSlide>
+            <Box
+              component="video"
+              sx={{
+                height: { xs: "63vh", md: "100vh" },
+                objectFit: "cover",
+                width: "100%",
+              }}
+              autoPlay={true}
+              muted
+              loop
+              playsInline
+              src={video}
+            ></Box>
+          </SwiperSlide>
           {images.map((image, index) => (
             <SwiperSlide key={index}>
               <Box
@@ -78,7 +94,7 @@ const Women = ({ t }) => {
                 sx={{
                   width: "100%",
                   height: { xs: "63vh", md: "100vh" },
-                  objectFit: "contain",
+                  objectFit: { xs: "cover", md: "contain" },
                 }}
               />
             </SwiperSlide>
@@ -193,6 +209,7 @@ const Women = ({ t }) => {
               pagination={true}
               modules={[Pagination, Navigation]}
             >
+              {" "}
               {sweaterProducts.slice(0, 4).map((item) => (
                 <SwiperSlide>
                   <Link

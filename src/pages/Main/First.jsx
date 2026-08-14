@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import img1 from "../../assets/images/man.webp";
 import logo from "../../assets/images/logo.svg";
+import video from "../../assets/images/man1.mp4";
 
 import { motion, useScroll, useTransform } from "framer-motion";
 const MotionBox = motion(Box);
@@ -17,7 +18,7 @@ const First = () => {
       component="section"
       sx={{
         position: "relative",
-        height: { xs: "288px", md: "100vh" },
+        height: "100vh",
         width: "100vw",
         overflow: "hidden",
         background: "#000",
@@ -33,6 +34,27 @@ const First = () => {
         // },
       }}
     >
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        {" "}
+        <video
+          style={{
+            margin: "0 auto",
+            objectFit: "cover",
+            width: "100%",
+            height: "100vh",
+          }}
+          autoPlay={true}
+          muted
+          loop
+          playsInline
+          src={video}
+        ></video>
+      </Box>
       {/* <MotionBox
         component="img"
         src={img1}

@@ -6,6 +6,7 @@ import img3 from "../../assets/images/vazy.webp";
 import img4 from "../../assets/images/polo.webp";
 import tableware from "../../assets/images/tableware.webp";
 import { Link } from "react-router-dom";
+import video from "../../assets/images/tableware.mp4";
 
 const Tableware = ({ t }) => {
   const categories = [
@@ -37,15 +38,26 @@ const Tableware = ({ t }) => {
   return (
     <Box component="section" sx={{ "& a": { display: "block" } }}>
       <Box
-        component="img"
         sx={{
-          width: "100%",
-          height: { xs: "390px", md: "auto" },
-          objectFit: "cover",
+          display: "flex",
+          justifyContent: "center",
         }}
-        src={tableware}
-        alt=""
-      />
+      >
+        {" "}
+        <video
+          style={{
+            margin: "0 auto",
+            objectFit: "cover",
+            width: "100%",
+            height: "100vh",
+          }}
+          autoPlay={true}
+          muted
+          loop
+          playsInline
+          src={video}
+        ></video>
+      </Box>
       <Container>
         <Typography
           variant="h2"
