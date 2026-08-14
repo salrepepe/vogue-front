@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import img1 from "../../assets/images/man.webp";
 import logo from "../../assets/images/logo.svg";
-import video from "../../assets/images/man1.mp4";
+import video from "../../assets/images/man.mp4";
 
 import { motion, useScroll, useTransform } from "framer-motion";
 const MotionBox = motion(Box);
