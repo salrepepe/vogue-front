@@ -86,7 +86,7 @@ const First = () => {
           alt=""
           style={{
             width: "auto",
-            maxWidth: "50%",
+            maxWidth: "90%",
           }}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}

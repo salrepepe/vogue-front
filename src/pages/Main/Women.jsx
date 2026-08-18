@@ -247,24 +247,33 @@ const Women = ({ t }) => {
         </Link>
         <Box className="brands">
           <Box className="brands-track">
-            {data?.map((item, index) => (
-              <Link
-                className="brand"
-                to={`/catalog/brand/${item.slug}/${item.id}?page=1&category=zhenshinam`}
-                key={index}
-              >
-                <Box
-                  component="img"
-                  src={item.logo}
-                  sx={{
-                    objectFit: "contain",
-                    width: { xs: "111px", md: "145px" },
-                    height: { xs: "74px", md: "85px" },
-                  }}
-                  alt=""
-                />
-              </Link>
-            ))}
+            {data
+              ?.filter(
+                (item) =>
+                  item.name !== "Kiton" &&
+                  item.name !== "Stefano Ricci" &&
+                  item.name !== "Zegna" &&
+                  item.name !== "Brioni" &&
+                  item.name !== "Rimowa",
+              )
+              ?.map((item, index) => (
+                <Link
+                  className="brand"
+                  to={`/catalog/brand/${item.slug}/${item.id}?page=1&category=zhenshinam`}
+                  key={index}
+                >
+                  <Box
+                    component="img"
+                    src={item.logo}
+                    sx={{
+                      objectFit: "contain",
+                      width: { xs: "111px", md: "145px" },
+                      height: { xs: "74px", md: "85px" },
+                    }}
+                    alt=""
+                  />
+                </Link>
+              ))}
           </Box>
         </Box>
       </Container>

@@ -227,24 +227,36 @@ const Man = ({ t }) => {
         </Link>
         <Box className="brands">
           <Box className="brands-track">
-            {data?.map((item, index) => (
-              <Link
-                className="brand"
-                to={`/catalog/brand/${item.slug}/${item.id}`}
-                key={index}
-              >
-                <Box
-                  component="img"
-                  src={item.logo}
-                  sx={{
-                    objectFit: "contain",
-                    width: { xs: "111px", md: "145px" },
-                    height: { xs: "74px", md: "85px" },
-                  }}
-                  alt=""
-                />
-              </Link>
-            ))}
+            {data
+              ?.filter(
+                (item) =>
+                  item.name !== "Bottega" &&
+                  item.name !== "Chanel" &&
+                  item.name !== "Pucci" &&
+                  item.name !== "Celine" &&
+                  item.name !== "Valentino" &&
+                  item.name !== "Maison Margiela" &&
+                  item.name !== "Alemais" &&
+                  item.name !== "Saint Laurent",
+              )
+              .map((item, index) => (
+                <Link
+                  className="brand"
+                  to={`/catalog/brand/${item.slug}/${item.id}`}
+                  key={index}
+                >
+                  <Box
+                    component="img"
+                    src={item.logo}
+                    sx={{
+                      objectFit: "contain",
+                      width: { xs: "111px", md: "145px" },
+                      height: { xs: "74px", md: "85px" },
+                    }}
+                    alt=""
+                  />
+                </Link>
+              ))}
           </Box>
         </Box>
       </Container>
