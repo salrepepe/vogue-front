@@ -61,16 +61,6 @@ const Women = ({ t }) => {
       }}
     >
       <Box>
-        <Swiper
-          effect="fade"
-          modules={[Autoplay, EffectFade]}
-          autoplay={{
-            delay: 5000,
-            disableOnInteraction: false,
-          }}
-          slidesPerView={1}
-        >
-          <SwiperSlide>
             <Box
               component="video"
               sx={{
@@ -84,6 +74,17 @@ const Women = ({ t }) => {
               playsInline
               src={video}
             ></Box>
+        {/* <Swiper
+          effect="fade"
+          modules={[Autoplay, EffectFade]}
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          slidesPerView={1}
+        >
+          <SwiperSlide>
+        
           </SwiperSlide>
           {images.map((image, index) => (
             <SwiperSlide key={index}>
@@ -99,7 +100,7 @@ const Women = ({ t }) => {
               />
             </SwiperSlide>
           ))}
-        </Swiper>
+        </Swiper> */}
       </Box>
 
       <Typography
