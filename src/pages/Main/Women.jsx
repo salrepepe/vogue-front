@@ -12,6 +12,7 @@ import "swiper/css/pagination";
 
 import { Autoplay, EffectFade, Pagination, Navigation } from "swiper/modules";
 
+import logo from "../../assets/images/logo.svg";
 import v1 from "../../assets/images/v1.JPG";
 import v2 from "../../assets/images/v2.JPG";
 import v3 from "../../assets/images/v3.JPG";
@@ -23,6 +24,8 @@ import v8 from "../../assets/images/v8.JPG";
 import v9 from "../../assets/images/v9.JPG";
 import v10 from "../../assets/images/v10.JPG";
 import video from "../../assets/images/women.mp4";
+
+import { motion } from "framer-motion";
 
 const Women = ({ t }) => {
   const { data } = useGetBrandsQuery();
@@ -60,20 +63,47 @@ const Women = ({ t }) => {
         },
       }}
     >
-      <Box>
-            <Box
-              component="video"
-              sx={{
-                height: { xs: "63vh", md: "100vh" },
-                objectFit: "cover",
-                width: "100%",
-              }}
-              autoPlay={true}
-              muted
-              loop
-              playsInline
-              src={video}
-            ></Box>
+      <Box
+        sx={{
+          position: "relative",
+        }}
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            pointerEvents: "none",
+            zIndex: 2,
+          }}
+        >
+          <motion.img
+            src={logo}
+            alt=""
+            style={{
+              width: "auto",
+              maxWidth: "90%",
+            }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+          />
+        </Box>
+        <Box
+          component="video"
+          sx={{
+            height: { xs: "63vh", md: "100vh" },
+            objectFit: "cover",
+            width: "100%",
+          }}
+          autoPlay={true}
+          muted
+          loop
+          playsInline
+          src={video}
+        ></Box>
         {/* <Swiper
           effect="fade"
           modules={[Autoplay, EffectFade]}

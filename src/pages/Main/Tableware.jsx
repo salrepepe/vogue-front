@@ -15,6 +15,9 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { useGetBrandsQuery, useGetProductsQuery } from "../../app/api/api";
 
+import logo from "../../assets/images/logo.svg";
+import { motion } from "framer-motion";
+
 const Tableware = ({ t }) => {
   const categories = [
     {
@@ -72,9 +75,34 @@ const Tableware = ({ t }) => {
         sx={{
           display: "flex",
           justifyContent: "center",
+          position: "relative",
         }}
       >
-        {" "}
+        <Box>
+          <Box
+            sx={{
+              position: "absolute",
+              inset: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              pointerEvents: "none",
+              zIndex: 2,
+            }}
+          >
+            <motion.img
+              src={logo}
+              alt=""
+              style={{
+                width: "auto",
+                maxWidth: "90%",
+              }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1 }}
+            />
+          </Box>
+        </Box>{" "}
         <video
           style={{
             margin: "0 auto",

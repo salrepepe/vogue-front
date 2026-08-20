@@ -14,6 +14,8 @@ import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
+
+
 const Man = ({ t }) => {
   const { data, isLoading } = useGetBrandsQuery();
 
@@ -46,6 +48,7 @@ const Man = ({ t }) => {
         padding: "71px 0 20px",
       }}
     >
+    
       <Container>
         {/* <Box
           sx={{
@@ -211,6 +214,64 @@ const Man = ({ t }) => {
               ))}
             </Swiper>
           </Grid>
+          {/* <Grid size={{ xs: 6, sm: 6, md: 3 }}>
+            <Swiper
+              slidesPerView={1}
+              navigation={true}
+              pagination={true}
+              modules={[Pagination, Navigation]}
+            >
+              {sweaterProducts.slice(0, 4).map((item) => (
+                <SwiperSlide>
+                  <Link
+                    to={`/catalog/brand/${item.brand.slug}/${item.brand.id}?page=1&category=muzhskoe/odezhda/svitery`}
+                  >
+                    <Box
+                      component="img"
+                      src={item?.images[0]}
+                      sx={{
+                        border: { xs: "1px solid #777", md: "none" },
+                        width: "100%",
+                        objectFit: "contain",
+                        height: { xs: "300px", md: 400 },
+                        padding: "6px",
+                      }}
+                      alt=""
+                    />
+                  </Link>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </Grid>
+          <Grid size={{ xs: 6, sm: 6, md: 3 }}>
+            <Swiper
+              slidesPerView={1}
+              navigation={true}
+              pagination={true}
+              modules={[Pagination, Navigation]}
+            >
+              {sweaterProducts.slice(0, 4).map((item) => (
+                <SwiperSlide>
+                  <Link
+                    to={`/catalog/brand/${item.brand.slug}/${item.brand.id}?page=1&category=muzhskoe/odezhda/svitery`}
+                  >
+                    <Box
+                      component="img"
+                      src={item?.images[0]}
+                      sx={{
+                        border: { xs: "1px solid #777", md: "none" },
+                        width: "100%",
+                        objectFit: "contain",
+                        height: { xs: "300px", md: 400 },
+                        padding: "6px",
+                      }}
+                      alt=""
+                    />
+                  </Link>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </Grid> */}
         </Grid>
 
         <Link to="/catalog?category=muzhskoe&page=1">

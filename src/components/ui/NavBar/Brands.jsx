@@ -10,7 +10,7 @@ const Brands = () => {
     <Grid container>
       <Grid size={3}>
         {data?.map((item, index) => (
-          <Link to={item.slug} key={index}>
+          <Link to={`/catalog/brand/${item?.slug}/${item?.id}`} key={index}>
             <Typography variant="h5" sx={{ fontWeight: 600, mb: 1.2 }}>
               {item.name}
             </Typography>

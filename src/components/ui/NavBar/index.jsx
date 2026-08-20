@@ -51,6 +51,7 @@ const NavBar = ({ open, setOpen, t }) => {
     >
       <Box
         sx={{
+          overflow: "scroll",
           p: "30px 0",
         }}
       >
